@@ -1,0 +1,245 @@
+/* ! HEADER - INICIO */
+
+/*?--- ANIMACION PARA CARRITO DESPLEGABLE - INICIO --- */
+/** declaraciones: */
+/* para dar opacidad a menu-toogle a recagar la pagina*/
+@keyframes opacity-loadPage-toogleCart {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0;
+  }
+}
+/* para deslizar entrada de carrito-toogle desde la derecha */
+@keyframes cart-slide-rigth-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+/* para deslizar salida de carrito-toogle hacia la derecha */
+@keyframes cart-slide-rigth-out {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+/** llamados a las animaciones: */
+/* para apertura de carrito-toogle */
+#cart-toggle:checked + .cart-dropdown {
+  animation: cart-slide-rigth-in 1s ease-in-out forwards,
+    opacity-loadPage-toogle 1s ease-in;
+}
+/* para cierre de carrito-toogle */
+.cart-dropdown {
+  animation: cart-slide-rigth-out 1s ease-in-out,
+    opacity-loadPage-toogle 1s ease-in;
+}
+
+/*?--- ANIMACION PARA CARRITO DESPLEGABLE - FINAL --- */
+
+/*?--- ANIMACION PARA MENU-LOGIN - INICIO --- */
+/* todo: para resoluciones mayores a 679px - inicio */
+/** declaraciones para resoluciones mayores a 711px: */
+/* para dar opacidad a los items de "menu-login" al recagar la pagina*/
+@keyframes opacity-loadPage-toogle {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0;
+  }
+}
+/* desplazar hacia la derecha a los items de "menu-login" cuando esten activados y darles una visibilidad en forma gradual */
+@keyframes login-items-slide-right {
+  from {
+    transform: translateX(-75%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+/* desplazar hacia la izquierda a los items de "menu-login" cuando esten desactivados y darles una opacidad en forma gradual */
+@keyframes login-items-slide-left {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-75%);
+    opacity: 0;
+  }
+}
+/** llamados para resoluciones mayores a 711px : */
+/* para desplazar items de menu-login hacia la derecha */
+#login-toggle:checked + .login-dropdown {
+  animation: login-items-slide-right 1s ease-out;
+  transform: translateX(0);
+}
+/* para desplazar items de menu-login hacia la izquierda */
+.login-dropdown {
+  animation: login-items-slide-left 1s ease-out;
+}
+/* para dar opacidad a los items menu-login al recargar la pagina  */
+.login-dropdown-item {
+  animation: opacity-loadPage-toogle 2s ease-in;
+}
+/* todo: para resoluciones mayores a 711px - final */
+
+/* todo: para resoluciones hasta 711px - inicio */
+/** declaraciones para resoluciones hasta a 711px: */
+@media (max-width: 711px) {
+  /* para dar opacidad a los items de "menu-login" al recagar la pagina*/
+  @keyframes opacity-loadPage-toogle {
+    from {
+      opacity: 0;
+      display: none;
+    }
+    to {
+      opacity: 0;
+      display: none;
+    }
+  }
+  /* desplazar hacia la derecha a los items de "menu-login" cuando esten activados y darles una visibilidad en forma gradual */
+  @keyframes login-items-slide-right {
+    from {
+      transform: translateX(-80%);
+      opacity: 0;
+      display: none;
+    }
+    to {
+      transform: translateX(-10%);
+      opacity: 1;
+      display: block;
+    }
+  }
+  /* desplazar menu-login hacia la izquierda con transparencia en el proceso */
+  @keyframes login-items-slide-left {
+    from {
+      transform: translateX(-10%);
+      opacity: 1;
+      display: block;
+    }
+    to {
+      transform: translateX(-80%);
+      opacity: 0;
+      display: nonegit add;
+    }
+  }
+  /** llamados para resoluciones hasta 679px : */
+  /* para desplazar menu-login hacia la derecha */
+  #login-toggle:checked + .login-dropdown {
+    animation: login-items-slide-right 1.5s ease-out;
+    transform: translateX(-10%);
+  }
+  /* para desplazar menu-login hacia la izquierda */
+  .login-dropdown {
+    animation: login-items-slide-left 1.5s ease-in-out;
+  }
+  /* para dar opacidad a los items menu-login al recargar la pagina  */
+  .login-dropdown-item {
+    animation: opacity-loadPage-toogle 2s ease-in;
+  }
+}
+/* todo: para resoluciones hasta 711px - final */
+/*?--- ANIMACION PARA MENU-LOGIN - FINAL --- */
+
+/*?--- ANIMACION PARA MENU DESPLEGABLE (MENU TOGGLE) - INICIO --- */
+/** declaraciones: */
+/* para dar opacidad a menu-toogle a recagar la pagina*/
+@keyframes opacity-loadPage-toogle {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0;
+  }
+}
+/* para deslizar entrada del menu-toogle desde la izquierda */
+@keyframes toogle-slide-left-in {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+/* para deslizar salida del menu-toogle hacia la izquierda */
+@keyframes toogle-slide-left-out {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+/** llamados a las animaciones: */
+/* para apertura de menu-toogle */
+#navbar-toggle:checked + .navbar-dropdown {
+  animation: toogle-slide-left-in 1s ease-in-out forwards,
+    opacity-loadPage-toogle 1s ease-in;
+}
+/* para cierre de menu-toogle */
+.navbar-dropdown {
+  animation: toogle-slide-left-out 1s ease-in-out,
+    opacity-loadPage-toogle 1s ease-in;
+}
+
+/*?--- ANIMACION PARA MENU DESPLEGABLE (MENU TOGGLE) - FINAL --- */
+
+/* ! HEADER - FINAL */
+
+/* ! MAIN - INICIO */
+/*?--- ANIMACION PARA SECTION HERO - INICIO --- */
+/** declaraciones: */
+/* para desplazar de izquierda a derecha el div con info dentro de imagen de portada (section hero) */
+@keyframes slide-right-hero-banner-data {
+  from {
+    opacity: 0;
+    left: -34%;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+    left: 25%;
+  }
+}
+/* para desplazar de arriba hacia abajao al titulo y eslogan de la portada (section hero) */
+@keyframes slide-top-hero-banner-data-title {
+  from {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+/** llamados: */
+.hero-banner-data {
+  animation: slide-right-hero-banner-data 2s ease-in-out;
+}
+.hero-banner-data-title,
+.hero-banner-data-slogan {
+  opacity: 0;
+  animation: slide-top-hero-banner-data-title 1s linear forwards;
+  animation-delay: 2s;
+}
+/*?--- ANIMACION PARA SECTION HERO - FINAL --- */

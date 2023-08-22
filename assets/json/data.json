@@ -1,0 +1,62 @@
+[
+  {
+    "nombre": "Cartucheras",
+    "precioLista": 1500,
+    "promo": "25%",
+    "descuento": 0.75,
+    "imagen_01": "/assets/img/products/cartucheras--01.jpg",
+    "imagen_02": "/assets/img/products/cartucheras--02.jpg",
+    "stock": true,
+    "id": 1
+  },
+  {
+    "nombre": "Discos Desmaquillantes",
+    "precioLista": 312,
+    "promo": "25%",
+    "descuento": 0.75,
+    "imagen_01": "/assets/img/products/desmaquillantes--01.jpg",
+    "imagen_02": "/assets/img/products/desmaquillantes--02.jpg",
+    "stock": true,
+    "id": 2
+  },
+  {
+    "nombre": "Bolso Matero",
+    "precioLista": 3750,
+    "promo": "25%",
+    "descuento": 0.75,
+    "imagen_01": "/assets/img/products/bolso--01.jpg",
+    "imagen_02": "/assets/img/products/bolso--02.jpg",
+    "stock": true,
+    "id": 3
+  },
+  {
+    "nombre": "Contenedor de Tela",
+    "precioLista": 3125,
+    "promo": "25%",
+    "descuento": 0.75,
+    "imagen_01": "/assets/img/products/contenedores--01.jpg",
+    "imagen_02": "/assets/img/products/contenedores--02.jpg",
+    "stock": true,
+    "id": 4
+  },
+  {
+    "nombre": "Neceser Femenino",
+    "precioLista": 1000,
+    "promo": "25%",
+    "descuento": 0.75,
+    "imagen_01": "/assets/img/products/neceser--01.jpg",
+    "imagen_02": "/assets/img/products/neceser--02.jpg",
+    "stock": true,
+    "id": 5
+  },
+  {
+    "nombre": "Antifaz",
+    "precioLista": 1500,
+    "promo": "25%",
+    "descuento": 0.75,
+    "imagen_01": "/assets/img/products/antifaz--01.jpg",
+    "imagen_02": "/assets/img/products/antifaz--02.jpg",
+    "stock": true,
+    "id": 6
+  }
+]

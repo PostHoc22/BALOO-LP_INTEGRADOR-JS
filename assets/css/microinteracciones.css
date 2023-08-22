@@ -1,0 +1,102 @@
+/** iconos "menu", "user" y "cart". */
+.bx-menu:hover,
+.bxs-user:hover,
+.bxs-cart:hover {
+  border-radius: 50%;
+  box-shadow: var(--bs-search-pink);
+  color: var(--text-pink);
+  transition: 0.2s ease-out all;
+}
+
+/** input search de la navbar */
+#navbar-search:focus {
+  border: none;
+  outline: none;
+  box-shadow: var(--bs-search-pink);
+  transition: 0.5s ease-out all;
+}
+#navbar-search::placeholder {
+  color: var(--text-gray-dark);
+  font-weight: 600;
+  letter-spacing: 0.05rem;
+}
+
+/** items de la navbar */
+.navbar-list-item a {
+  color: var(--text-gray-dark);
+  transition: 0.1s ease-out all;
+}
+.navbar-list-item a:hover {
+  color: var(--text-pink);
+  transition: 0.1s ease-out all;
+}
+
+/** items de login user */
+.login-dropdown-item a:hover {
+  color: var(--text-pink);
+  transition: 0.3s ease-out all;
+}
+
+/** cambio de imagen de las cards */
+.card-img-back:hover {
+  opacity: 1;
+  transition: opacity 0.4s ease-in-out;
+}
+
+/* .product-card-item:hover {
+  transform: scale(1.05);
+  transition: all 0.4s ease-in-out;
+} */
+
+/** botones (elementos button) */
+.button::before {
+  content: "";
+  background-color: #ff0068;
+  width: 0;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 700ms ease-in-out;
+}
+
+.button:hover::before {
+  width: 100%;
+}
+.button:active {
+  transform: translateY(7%);
+}
+
+/** botones de tipo submit */
+.btn-input {
+  transition: all 100ms ease-in-out;
+}
+.btn-input:hover {
+  background-color: #ff0068;
+  box-shadow: 1px 1px 10px 3px pink;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: all 300ms ease-in-out;
+}
+
+/** BOTON START */
+.btn-start:hover {
+  background-color: #ff0068;
+  box-shadow: 1px 1px 10px 3px pink;
+  font-weight: bolder;
+  transition: all 300ms ease-in-out;
+  color: white;
+  transform: scale(1.4, 1.4);
+}
+
+.btn-init:active {
+  transform: translateY(7%);
+}
+
+/** sombra para icono de instagram*/
+.footer-networks i:hover {
+  box-shadow: var(--bs-search-pink);
+  transition: all 0.3s;
+  color: var(--bc-pink);
+}

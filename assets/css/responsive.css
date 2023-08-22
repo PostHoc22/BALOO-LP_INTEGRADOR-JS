@@ -1,0 +1,295 @@
+@media (max-width: 1400px) {
+  body {
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 1312px) {
+  /* ? ---------- CONTACT ---------- */
+  #message {
+    width: 38rem;
+  }
+}
+
+@media (max-width: 711px) {
+  /* ? ---------- HEADER ---------- */
+  .navbar-toggle-label {
+    display: block;
+    padding: 0 0.5rem;
+    z-index: 2;
+  }
+  /* ? ---------- HEADER ---------- */
+  .navbar {
+    position: relative;
+    justify-content: space-between;
+    align-items: start;
+  }
+  /* ? ---------- HEADER ---------- */
+  .navbar-dropdown {
+    position: absolute;
+    top: 48px;
+    /* display: none; */
+    flex-direction: column;
+    /* border: solid 1px rgb(18, 27, 150); */
+    width: 100%;
+    height: max-content;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    background-image: var(--bg-navbar);
+    transform: translateX(-100%);
+  }
+  /* ? ---------- HEADER ---------- */
+  #navbar-toggle:checked + .navbar-dropdown {
+    display: flex;
+    z-index: 1;
+  }
+  /* ? ---------- HEADER ---------- */
+  #navbar-search {
+    width: 50%;
+    margin: 1.2rem 0;
+    text-align: center;
+  }
+  /* ? ---------- HEADER ---------- */
+  .navbar-list {
+    /* border: solid 2px green; */
+    /* background-color: blueviolet; */
+    width: 100%;
+    flex-direction: column;
+    gap: 0;
+  }
+  /* ? ---------- HEADER ---------- */
+  .navbar-list-item {
+    width: 100%;
+    padding: 0.5rem 0rem;
+    /* background-color: aqua; */
+    text-align: center;
+    gap: 0;
+  }
+  .navbar-list-item:hover {
+    /* background-color: rgb(23, 216, 216, 0.4); */
+    background-image: linear-gradient(
+      to right bottom,
+      #a1d8dd,
+      #92d3d4,
+      #7ac0be,
+      #5faaa4,
+      #4ea89c
+    );
+  }
+  /* ? ---------- HEADER ---------- */
+  .login {
+    /* border-color: tomato; */
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 0.5rem;
+    padding-left: 6rem;
+    gap: 0;
+  }
+  .login:hover {
+    background-image: linear-gradient(
+      to right bottom,
+      #a1d8dd,
+      #92d3d4,
+      #7ac0be,
+      #5faaa4,
+      #4ea89c
+    );
+  }
+  /* ? ---------- HEADER ---------- */
+  .login-toggle-label {
+    padding: 0 0.5rem;
+  }
+  /* ? ---------- HEADER ---------- */
+  .bx-user {
+    font-size: 4rem;
+  }
+  /* ? ---------- HEADER ---------- */
+  .login-dropdown {
+    transition: 2s all;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    transform: translateY(-3000%);
+  }
+  /* ? ---------- HEADER ---------- */
+  .login-dropdown-item {
+    width: 6rem;
+    /* border: solid goldenrod; */
+    /* color: tomato; */
+    padding-left: 0;
+  }
+  /* ? ---------- HEADER ---------- */
+  .menu {
+    width: 100%;
+    background-color: #faf2f1;
+  }
+}
+
+@media (max-width: 686px) {
+  /* ? ---------- CARRITO ---------- */
+  .cart-body {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 670px) {
+  /* ? ---------- CONTACT ---------- */
+  .contact {
+    background-image: linear-gradient(
+      to right bottom,
+      #47484a,
+      #46484c,
+      #45494e,
+      #434950,
+      #414a52,
+      #444d55,
+      #484f57,
+      #4b525a,
+      #54575e,
+      #5c5d61,
+      #636365,
+      #696969
+    );
+    border-radius: 1rem;
+    text-shadow: 0px 0px 5px #000000;
+  }
+  .contact-img {
+    display: block;
+    border-radius: 1rem;
+  }
+}
+
+@media (max-width: 599px) {
+  /* ? ---------- HERO ---------- */
+  .hero-banner-data-slogan {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 490px) {
+  /* ? ---------- HERO ---------- */
+  .hero-banner-data-title {
+    font-size: 3.5rem;
+    padding-bottom: 1rem;
+  }
+  /* ? ---------- ABOUT-US ---------- */
+  .about-us-info {
+    background-size: contain;
+  }
+}
+@media (max-width: 400px) {
+  /* ? ---------- ABOUT-US ---------- */
+  .about-us__title {
+    font-size: 2rem;
+  }
+  .about-us-info {
+    padding: 0.2rem;
+    gap: 0rem;
+  }
+  .about-us-info__data {
+    font-size: 1rem;
+    line-height: 1.1rem;
+    text-align: center;
+  }
+
+  @media (max-width: 384px) {
+    /* ? ---------- HERO ---------- */
+    .hero-banner-data {
+      justify-content: space-between;
+    }
+    /* ? ---------- HERO ---------- */
+    .hero-banner-data-title {
+      font-size: 3rem;
+      padding-top: 0.1rem;
+    }
+    /* ? ---------- HERO ---------- */
+    .hero-banner-data-slogan {
+      font-size: 1rem;
+      padding-top: 0.1rem;
+      line-height: 1.2rem;
+    }
+  }
+
+  @media (max-width: 320px) {
+    /* ? ---------- HERO ---------- */
+    .hero-banner-data-title {
+      font-size: 2.5rem;
+    }
+    /* ? ---------- HERO ---------- */
+    .hero-banner-data-slogan {
+      font-size: 0.6rem;
+      line-height: 0.7rem;
+      padding-top: 1rem;
+    }
+  }
+}
+
+@media (max-width: 330px) {
+  /* ? ---------- CONTACT ---------- */
+  .contact-form-customer > div {
+    width: 10rem;
+  }
+  .contact-fomt-customer_message {
+    width: 10rem;
+  }
+  .contact-form-customer_message label {
+    width: auto;
+  }
+  #email,
+  #name,
+  #message {
+    font-size: 0.8rem;
+    width: 10rem;
+    padding: 0;
+  }
+}
+
+@media (max-width: 301px) {
+  /* ? ---------- HEADER ---------- */
+  .logo-img {
+    width: 6rem;
+    height: 5rem;
+  }
+  /* ? ---------- HEADER ---------- */
+  .logo-title {
+    font-size: 2rem;
+  }
+  /* ? ---------- HEADER ---------- */
+  .login-dropdown-item {
+    width: 5rem;
+  }
+  /* ? ---------- HEADER ---------- */
+  .login-dropdown-item a {
+    /* transform: translateY(-2000%); */
+    font-size: 0.6rem;
+  }
+}
+
+/* ? ---------- HERO ---------- */
+@media (max-width: 249px) {
+  .hero-banner-data-title {
+    font-size: 1rem;
+  }
+  /* ? ---------- HERO ---------- */
+  .hero-banner-data-slogan {
+    font-size: 0.5rem;
+    line-height: 1rem;
+    padding-top: 1rem;
+  }
+  /* ? ---------- HERO ---------- */
+  .hero-banner-data {
+    min-block-size: none;
+    bottom: 1rem;
+  }
+}
+
+@media (max-width: 204px) {
+  /* ? ---------- HERO ---------- */
+  .hero-banner-data-title {
+    font-size: 1rem;
+  }
+}

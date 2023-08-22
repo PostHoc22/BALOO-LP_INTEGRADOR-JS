@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baloo</title>
+  <!-- link para icono en pestaña -->
+  <link rel="shortcut icon" href="/assets/svg/bear-icon.svg" type="svg">
+  <!-- link para estilos generales: "style.css" -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <!-- link para responsividad y estilos especificos de la resolucion: "responsive.css"  -->
+  <link rel="stylesheet" href="/assets/css/responsive.css">
+  <!-- link para animaciones: "animaciones.css" -->
+  <link rel="stylesheet" href="/assets/css/animaciones.css">
+  <!-- link para microinteracciones: "microinteracciones.css" -->
+  <link rel="stylesheet" href="/assets/css/microinteracciones.css">
+  <!-- link para iconos desde box-icons: -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+
+  <header>
+    <div class="offer">
+      <p> 25% OFF EN COMPRAS POR SHOP ONLINE | EXCLUYE PRODUCTOS EN PROMOCION</p>
+    </div>
+    <div class="logo">
+      <a href="#">
+        <img class="logo-img" src="/assets/svg/bear-icon.svg" alt="foto de oso, logo de la empresa"></a>
+      <span class="line"></span>
+      <span class="logo-title">Baloo</span>
+    </div>
+    <div class="navbar">
+      <!-- BARRA DE NAVEGACION -->
+      <label for="navbar-toggle" class="navbar-toggle-label">
+        <i class='bx bx-menu'></i>
+        <!-- icono del menu desplegable -->
+      </label>
+      TODO <input type="checkbox" id="navbar-toggle" />
+      <div class="navbar-dropdown menu">
+        <!-- ".navbar-dropdown": envuelve a los elementos de la navbar que integraran un menu desplegable para dispositivos con una resolucion menor -->
+        <input type="search" name="search" id="navbar-search" placeholder="Buscar">
+        <ul class="navbar-list">
+          <li class="navbar-list-item"><a href="#">Inicio</a></li>
+          <li class="navbar-list-item"><a href="#about-us">Nosotros</a></li>
+          <li class="navbar-list-item"><a href="#product">Productos</a></li>
+          <li class="navbar-list-item"><a href="#contact">Contacto</a></li>
+        </ul>
+        <div class="login">
+          <label for="login-toggle" class="login-toggle-label">
+            <!-- icono de login y registro para usuarios -->
+            <i class='bx bxs-user'></i>
+          </label>
+          <input type="checkbox" id="login-toggle">
+          <ul class="login-dropdown">
+            <li class="login-dropdown-item"><a href="/assets/html/registro.html">Crear Cuenta</a></li>
+            <li class="login-dropdown-item"><a href="/assets/html/login.html">Iniciar Sesion</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- carrito de compras -->
+      <div class="cart">
+        <label for="cart-toggle">
+          <i class='bx bxs-cart'></i>
+        </label>
+        <input type="checkbox" id="cart-toggle">
+        <div class="cart-dropdown menu">
+          <h3 class="cart-title">Productos Cargados a tu Carrito:</h3>
+          <p class="no-products">No hay productos cargados en su Carrito</p>
+          <div class="cart-body">
+            <img class="cart-img" src="/assets/img/products/antifaz--02.jpg" alt="">
+            <p class="cart-product-name">Producto: Antifaz</p>
+            <p class="cart-product-price">Precio: $300</p>
+            <div class="cart-quantity-container">
+              <p class="cart-product-quantity">Cantidad: 1</p>
+              <button class="cart-product-btn-add">+</button>
+              <button class="cart-product-btn-rem">-</button>
+            </div>
+            <p class="cart-product-subtotal">Subtotal: $30 </p>
+          </div>
+          <p class="cart-product-total">Total</p>
+
+        </div>
+      </div>
+      <div class="glass">
+        <!-- para efecto blur cuando el menu esta desplegado -->
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="btn-init">
+      <a class="btn-start" href="#"><i class='bx bxs-chevrons-up bx-tada'></i></a>
+    </div>
+
+    <section id="hero" class="hero">
+
+      <div class="hero-banner">
+        <img src="./assets/img/banner-slides/portada.webp" alt="foto portada">
+      </div>
+
+      <div class="hero-banner-data">
+        <h1 class="hero-banner-data-title">Baloo</h1>
+        <p class="hero-banner-data-slogan">Todo lo que estas buscando</p>
+      </div>
+
+    </section>
+
+    <section id="about-us" class="about-us">
+
+      <h2 class="about-us__title"> Descubre quiénes somos y cómo ponemos magia en cada regalo ......
+      </h2>
+
+      <div class="about-us-info">
+
+        <p class="about-us-info__data">En Baloo, tomamos muy en serio el arte de hacer un regalo.
+          Nuestra misión es ayudarte a encontrar el
+          regalo perfecto para cada ocasión.
+        </p>
+
+        <p class="about-us-info__data">Nos emociona descubrir los detalles que harán sonreír a esa
+          persona especial. Ya sea un cumpleaños, aniversario, boda o simplemente un gesto de cariño,
+          estamos
+          aquí para ayudarte a transmitir tus sentimientos a través de nuestros regalos.
+        </p>
+
+        <p class="about-us-info__data"> Nuestra coleccion ofrece una gran selección de artículos
+          únicos,
+          diseñados con cuidado y que se
+          adaptan a todo tipo de preferencias y precios.
+        </p>
+
+        <p class="about-us-info__data">Te recomendamos explorar nuestra seccion de productos,
+          verás que es
+          muy
+          fácil encontrar algo para
+          todos los gustos en tu lista de regalos ......
+        </p>
+
+        <p class="about-us-info__data">¡ Comencemos !</p>
+
+      </div>
+    </section>
+
+
+    <section id="product" class="product">
+
+      <h2 class="product-title">Nuestra Colección de Productos</h2>
+
+      <p class="product-subtitle">Tenemos una gran selección de productos para todos los gustos en tu lista de
+        regalos. Con <b>Baloo</b> verás que es muy fácil sacarle una sonrisa a tu ser querido.
+      </p>
+
+      <div class="product-cards-container">
+
+
+      </div>
+
+
+    </section>
+
+
+    <section class="payment">
+      <h2 class="payment-title">FORMAS DE PAGO</h2>
+      <ul class="payment-list">
+        <li><i class='bx bx-money-withdraw'></i> Efectivo</li>
+        <li><img class="mp" src="/assets/img/mercado-pago-2.png" alt="">Mercado Pago</li>
+        <li><i class='bx bxs-bank'></i>Transferencia Bancaria</li>
+      </ul>
+    </section>
+
+    <section id="contact" class="contact">
+
+      <h2 class="contact-title">¡Contáctanos para hacer realidad tu regalo perfecto!</h2>
+
+      <img src="/assets/img/banner-slides/bolso.webp" alt="" class="contact-img">
+
+      <div class="contact-info">
+
+        <div class="contact-data">
+
+          <div class="contact-data-whatsapp">
+            <h4 class="contact-data-whatsapp_title">
+              <i class='bx bxl-whatsapp'></i> WhatsApp:
+            </h4>
+            <p class="contact-data-whatsapp_number">
+              +54 9 11 2233-2233
+            </p>
+          </div>
+
+          <div class="contact-data-email">
+            <h4 class="contact-data-email_title">
+              <i class='bx bx-envelope'></i> Correo Electronico:
+            </h4>
+            <p class="contact-data-email_mail">
+              contacto@baloo.com.ar
+            </p>
+          </div>
+
+          <div class="contact-data-days">
+            <h4 class="contact-data-days_title">
+              <i class='bx bx-time-five'></i> Horarios de atencion:
+            </h4>
+            <p class="contact-data-days_hours">
+              Lunes a Sabados de 9:00hs a 17:00hs
+            </p>
+          </div>
+
+          <div class="contact-data-location">
+            <h4 class="contact-data-location_title">
+              <i class='bx bx-map'></i> Ubicación:
+            </h4>
+            <p class="contact-data-location_adress">
+              Lanús Oeste, Lanús, Provincia de Buenos Aires
+            </p>
+          </div>
+
+        </div>
+
+        <form class="contact-form" action="">
+          <div class="contact-form-customer">
+            <div class="contact-form-customer_email">
+              <label for="email">Email:</label>
+              <input type="email" name="mail" id="email" placeholder="Ingrese una cuenta de email valida" required>
+            </div>
+
+            <div class="contact-form-customer_name">
+              <label for="name">Nombre:</label>
+              <input type="text" name="nombre" id="name" placeholder="Ingrese su Nombre" required>
+            </div>
+          </div>
+
+          <div class="contact-form-customer_message">
+            <label for="message">Mensaje:</label>
+            <textarea name="reason" id="message" cols="50" rows="5" required
+              placeholder="Ingrese su mensaje"></textarea>
+          </div>
+
+          <div class="contact-container-form_button">
+            <input type="submit" value="Enviar" class="button btn-input">
+          </div>
+        </form>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-data">
+
+      <div class="footer-data-shipping">
+        <i class='bx bxs-truck'></i>
+        <h5>ENVIOS A TODO EL PAIS</h5>
+        <p>COMPRA SIN SALIR DE TU CASA</p>
+      </div>
+      <div class="footer-data-store">
+        <i class='bx bx-store'></i>
+        <h5>RETIRA TU COMPRA</h5>
+        <p>POR NUESTRO PUNTO DE VENTA</p>
+      </div>
+      <div class="footer-data-lock">
+        <i class='bx bx-lock'></i>
+        <h5>SITIO SEGURO</h5>
+        <p>PROTEGEMOS TUS DATOS</p>
+      </div>
+    </div>
+
+    <div class="footer-networks">
+      <h5>SEGUINOS EN INSTAGRAM</h5>
+      <a href="https://instagram.com/baloo.ls?igshid=NTc4MTIwNjQ2YQ==" target="_blank"><i
+          class='bx bxl-instagram'></i></a>
+    </div>
+
+    <div class="footer-logo">
+      <img src="/assets/svg/bear-icon.svg" alt="">
+      <p>Copyright BALOO - 2023. Todos los derechos reservados</p>
+      <p>Sitio web desarrollado por JOSE GASTON CHIESA IT</p>
+    </div>
+
+  </footer>
+
+  <script src="./assets/js/index.js"></script>
+</body>
+
+</html>
