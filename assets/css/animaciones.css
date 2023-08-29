@@ -3,18 +3,18 @@
 /*?--- ANIMACION PARA CARRITO DESPLEGABLE - INICIO --- */
 /** declaraciones: */
 /* para dar opacidad a menu-toogle a recagar la pagina*/
-@keyframes opacity-loadPage-toogleCart {
+/* @keyframes opacity-loadPage-toogleCart {
   from {
     opacity: 0;
   }
   to {
     opacity: 0;
   }
-}
-/* para deslizar entrada de carrito-toogle desde la derecha */
-@keyframes cart-slide-rigth-in {
+} */
+/* para deslizar entrada de carrito */
+@keyframes cart-slide-in {
   from {
-    transform: translateX(100%);
+    transform: translateX(-100%);
     opacity: 0;
   }
   to {
@@ -22,27 +22,28 @@
     opacity: 1;
   }
 }
-/* para deslizar salida de carrito-toogle hacia la derecha */
-@keyframes cart-slide-rigth-out {
+/* para deslizar salida de carrito */
+@keyframes cart-slide-out {
   from {
     transform: translateX(0);
     opacity: 1;
   }
   to {
-    transform: translateX(100%);
+    transform: translateX(-100%);
     opacity: 0;
   }
 }
 /** llamados a las animaciones: */
-/* para apertura de carrito-toogle */
-#cart-toggle:checked + .cart-dropdown {
-  animation: cart-slide-rigth-in 1s ease-in-out forwards,
-    opacity-loadPage-toogle 1s ease-in;
+/** para apertura de carrito */
+.cart-show {
+  animation: cart-slide-in 1s ease-in-out forwards;
+  /* opacity-loadPage-toogle 1s ease-in; */
 }
-/* para cierre de carrito-toogle */
+/** para cierre de carrito */
 .cart-dropdown {
-  animation: cart-slide-rigth-out 1s ease-in-out,
-    opacity-loadPage-toogle 1s ease-in;
+  /* visibility: visible; */
+  animation: cart-slide-out 1s ease-in-out;
+  /* opacity-loadPage-toogle 1s ease-in; */
 }
 
 /*?--- ANIMACION PARA CARRITO DESPLEGABLE - FINAL --- */

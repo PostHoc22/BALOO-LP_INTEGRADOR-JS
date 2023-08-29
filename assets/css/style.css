@@ -254,52 +254,68 @@ header {
 }
 
 /*TODO ESTILOS CARRITO Y SU MENU*/
-
+/* arreglar con media query posicion a flex start para .cart */
 .cart {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 10%;
+  width: 22%;
 }
 
-/* Estilos para ocultar el input tipo checkbox */
-#cart-toggle {
-  display: none;
+.bxs-cart {
+  position: relative;
+}
+
+.cart-bubble {
+  position: absolute;
+  bottom: 1.3rem;
+  left: 1.9rem;
+  background-color: rgba(43, 42, 42, 0.856);
+  color: white;
+  font-size: 0.9rem;
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bolder;
 }
 
 /* Estilos para el menú del carrito */
-.cart-dropdown {
+.cart-show {
   /* Agrega estilos para el aspecto del menú desplegable */
-  /* display: none; */
-  transform: translateY(-10000%);
   width: 100%;
-  position: absolute;
-  top: 104%;
-  right: 0;
-  z-index: 2;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  /* width: 100%; */
   height: max-content;
   gap: 2rem;
   align-items: center;
   background-color: rgb(250, 242, 241);
   padding: 1rem 0rem;
-  overflow-x: hidden;
+  position: absolute;
+  top: 3.7rem;
+  z-index: 2;
 }
 
-/* Mostrar el menú cuando el input está marcado */
-#cart-toggle:checked + .cart-dropdown {
-  display: flex;
-  /* flex-direction: column;
-  flex-wrap: wrap;
+/* Estilos para ocultar menu carrito */
+.cart-dropdown {
+  visibility: hidden;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   height: max-content;
   gap: 2rem;
   align-items: center;
-  background-color: tomato;
-  padding: 1rem 0rem; */
+  background-color: rgb(250, 242, 241);
+  padding: 1rem 0rem;
+  position: absolute;
+  top: 3.7rem;
+  z-index: 2;
+  transform: translate(-100%);
+  transition: all 1.5s cubic-bezier(0.92, 0.01, 0.35, 0.99);
 }
 
 .cart-body {

@@ -37,7 +37,7 @@
         <i class='bx bx-menu'></i>
         <!-- icono del menu desplegable -->
       </label>
-      TODO <input type="checkbox" id="navbar-toggle" />
+      <!-- TODO <input type="checkbox" id="navbar-toggle" /> -->
       <div class="navbar-dropdown menu">
         <!-- ".navbar-dropdown": envuelve a los elementos de la navbar que integraran un menu desplegable para dispositivos con una resolucion menor -->
         <input type="search" name="search" id="navbar-search" placeholder="Buscar">
@@ -61,32 +61,37 @@
       </div>
       <!-- carrito de compras -->
       <div class="cart">
-        <label for="cart-toggle">
-          <i class='bx bxs-cart'></i>
-        </label>
-        <input type="checkbox" id="cart-toggle">
-        <div class="cart-dropdown menu">
-          <h3 class="cart-title">Productos Cargados a tu Carrito:</h3>
-          <p class="no-products">No hay productos cargados en su Carrito</p>
-          <div class="cart-body">
-            <img class="cart-img" src="/assets/img/products/antifaz--02.jpg" alt="">
-            <p class="cart-product-name">Producto: Antifaz</p>
-            <p class="cart-product-price">Precio: $300</p>
-            <div class="cart-quantity-container">
-              <p class="cart-product-quantity">Cantidad: 1</p>
-              <button class="cart-product-btn-add">+</button>
-              <button class="cart-product-btn-rem">-</button>
-            </div>
-            <p class="cart-product-subtotal">Subtotal: $30 </p>
+        <!-- <label for="cart-toggle"> -->
+        <i class='bx bxs-cart'>
+          <div class="cart-bubble">0</div>
+        </i>
+      </div>
+      <!-- </label> -->
+      <!-- <input type="checkbox" id="cart-toggle"> -->
+      <div class="cart-dropdown">
+        <!-- <h3 class="cart-title">Productos Cargados a tu Carrito:</h3>
+        <p class="no-products">No hay productos cargados en tu Carrito</p>
+        <div class="cart-body">
+          <img class="cart-img" src="/assets/img/products/antifaz--02.jpg" alt="">
+          <p class="cart-product-name">Producto: Antifaz</p>
+          <p class="cart-product-price">Precio: $300</p>
+          <div class="cart-quantity-container">
+            <p class="cart-product-quantity">Cantidad: 1</p>
+            <button class="cart-product-btn-add">+</button>
+            <button class="cart-product-btn-rem">-</button>
           </div>
-          <p class="cart-product-total">Total</p>
-
+          <p class="cart-product-subtotal">Subtotal: $300 </p>
         </div>
+        <p class="cart-product-total">Total</p> -->
       </div>
-      <div class="glass">
-        <!-- para efecto blur cuando el menu esta desplegado -->
-      </div>
+
     </div>
+
+
+    <div class="glass">
+      <!-- para efecto blur cuando el menu esta desplegado -->
+    </div>
+
   </header>
 
   <main>
