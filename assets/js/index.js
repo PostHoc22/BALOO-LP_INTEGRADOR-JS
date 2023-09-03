@@ -3,6 +3,7 @@
 const $cardsContainer = document.querySelector(".product-cards-container"); //contenedor general de cards
 const $cardItem = document.querySelectorAll(".product-card-item"); // contenedor de cada card
 const $cardBtn = document.querySelectorAll(".btn-card"); //botones de card
+const $cardTitle = document.querySelectorAll(".card-info-title");
 
 const $cartContainer = document.querySelector(".cart"); //capturo contenedor del carrito
 const $cartIcon = document.querySelector(".bxs-cart"); //capturo icono del carrito
@@ -29,6 +30,7 @@ const fetchData = async () => {
 };
 //*conexion a base de datos de productos: "data.json" - FINAL
 
+//*template para clonar tarjetas de productos
 const templateCardProduct = (product) => {
   return `
       <div class="product-card-item">
@@ -51,17 +53,14 @@ const templateCardProduct = (product) => {
             <div class="card-info-buys-btn">
               <button class="btn-card button" data-id="${
                 product.id
-              }" data-nombre="${product.nombre}" data-precio="${(
-    product.precioLista * product.descuento
-  )
-    .toFixed(2)
-    .replace(".", ",")}" data-img="${product.imagen_02}" >Comprar</button>
+              }">Comprar</button>
             </div>
           </div>
         </div>
       `;
 };
 
+//* renderizado de tarjetas de productos
 const renderCardProducts = (data) => {
   $cardsContainer.innerHTML = data
     .map((product) => templateCardProduct(product))
@@ -79,8 +78,7 @@ const toggleCart = () => {
 };
 
 const addCart = (e) => {
-  //para agregar producto al carrito
-
+  //para capturar info de cada producto al carrito
   if (e.target.classList.contains("btn-card")) {
     setCart(e.target.parentElement.parentElement.parentElement);
   }
@@ -88,12 +86,13 @@ const addCart = (e) => {
 };
 
 const setCart = (cart) => {
+  //enviar productos al carrito
   console.log(cart);
   const product = {
     id: cart.querySelector(".btn-card").dataset.id,
-    name: cart.querySelector(".btn-card").dataset.nombre,
-    price: cart.querySelector(".btn-card").dataset.precio,
-    img: cart.querySelector(".btn-card").dataset.img,
+    name: cart.querySelector(".card-info-title").textContent,
+    price: cart.querySelector(".card-info-buys-price").textContent,
+    img: cart.querySelector(".card-img-back").src,
     quantity: 1,
   };
   if (cartShop.hasOwnProperty(product.id)) {
