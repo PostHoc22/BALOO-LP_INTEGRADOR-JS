@@ -8,6 +8,7 @@ const $cardTitle = document.querySelectorAll(".card-info-title");
 const $cartContainer = document.querySelector(".cart"); //capturo contenedor del carrito
 const $cartIcon = document.querySelector(".bxs-cart"); //capturo icono del carrito
 const $cartDropdown = document.querySelector(".cart-dropdown"); //despliege del menu del carrito
+const $cartItem = document.querySelector(".cart-item-container"); //contenedor de cada producto agregado al carrito;
 
 //*conexion con los elementos del DOM - FINAL
 
@@ -69,7 +70,10 @@ const renderCardProducts = (data) => {
 
 //?---- CONTENEDOR CARDS FINAL ----
 
-//*---- CONTENEDOR CARRITO INICIO ----
+//-------------------------------------
+//-------------------------------------
+
+//?---- CONTENEDOR CARRITO INICIO ----
 
 const toggleCart = () => {
   //para desplegar y ocultar menu
@@ -77,17 +81,18 @@ const toggleCart = () => {
   $cartDropdown.classList.toggle("cart-show");
 };
 
-const addCart = (e) => {
-  //para capturar info de cada producto al carrito
+const catchValuesCart = (e) => {
+  //para escuchar desde DOM la info de cada producto del carrito
   if (e.target.classList.contains("btn-card")) {
+    // console.log(e.target.parentElement.parentElement.parentElement);
     setCart(e.target.parentElement.parentElement.parentElement);
   }
   e.stopPropagation();
 };
 
 const setCart = (cart) => {
-  //enviar productos al carrito
-  console.log(cart);
+  //capturar info del producto para adherir luego al carrito
+  // console.log(cart);
   const product = {
     id: cart.querySelector(".btn-card").dataset.id,
     name: cart.querySelector(".card-info-title").textContent,
@@ -99,38 +104,52 @@ const setCart = (cart) => {
     product.quantity = cartShop[product.id].quantity + 1;
   }
   cartShop[product.id] = { ...product };
-  console.log(product);
+  // console.log(cartShop);
+  addToCart();
 };
 
-//   return ($cartDropdown.innerHTML = `
-//   <h3 class="cart-title">Productos Cargados a tu Carrito:</h3>
-//   <p class="no-products">No hay productos cargados en tu Carrito</p>
-//   <div class="cart-body">
-//     <img class="cart-img" src="${product.imagen_02}" alt="${product.nombre}">
-//     <p class="cart-product-name">Producto: ${product.nombre}</p>
-//     <p class="cart-product-price">Precio: $${(
-//       product.precioLista * product.descuento
-//     )
-//       .toFixed(2)
-//       .replace(".", ",")}</p>
-//     <div class="cart-quantity-container">
-//       <p class="cart-product-quantity">Cantidad: 1</p>
-//       <button class="cart-product-btn-add">+</button>
-//       <button class="cart-product-btn-rem">-</button>
-//     </div>
-//     <p class="cart-product-subtotal">Subtotal: $300 </p>
-//   </div>
-//   <p class="cart-product-total">Total</p>
-//   `);
-// };
+const addToCart = () => {
+  console.log(cartShop);
+  // $cartDropdown.classList.remove("no-products");
+  if (Object.keys(cartShop).length === 0) {
+    `  <h3 class="cart-title">Carrito de Compras</h3>
+    <p class="no-products">Aun no hay productos cargados en tu Carrito</p>
+    <div class="cart-item-container">
+    </div>`;
+  } else {
+    $cartDropdown.innerHTML = Object.values(cartShop)
+      .map((product) => templateAddToCart(product))
+      .join("");
+  }
+};
 
-//*---- CONTENEDOR CARRITO FINAL ----
+const templateAddToCart = (product) => {
+  return `
+  <h3 class="cart-title">Carrito de Compras</h3>
+  <div class="cart-column">
+  <div class="cart-body">
+    <img class="cart-img" src="${product.img}" alt="${product.name}">
+    <p class="cart-product-name"> ${product.name}</p>
+    <p class="cart-product-price">${product.price}</p>
+    <div class="cart-quantity-container">
+    <button class="cart-product-btn-rem">-</button>
+    <p class="cart-product-quantity">${product.quantity}</p>
+      <button class="cart-product-btn-add">+</button>
+    </div>
+    <p class="cart-product-subtotal">Subtotal: $300 </p>
+  </div>
+    <p class="cart-product-total">Total</p>
+  </div>
+  `;
+};
+
+//?---- CONTENEDOR CARRITO FINAL ----
 
 const init = () => {
   document.addEventListener("DOMContentLoaded", fetchData); //para renderizar apenas termine de cargar el browser
 
   $cartIcon.addEventListener("click", toggleCart); //para desplegar carrito
 
-  $cardsContainer.addEventListener("click", addCart); //para agregar productos al carrito
+  $cardsContainer.addEventListener("click", catchValuesCart); //para escuchar del DOM evento click con la info de cada producto del carrito
 };
 init();

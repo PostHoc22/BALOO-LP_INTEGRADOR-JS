@@ -282,6 +282,12 @@ header {
   font-weight: bolder;
 }
 
+.cart-item-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 /* Estilos para el menú del carrito */
 .cart-show {
   /* Agrega estilos para el aspecto del menú desplegable */
