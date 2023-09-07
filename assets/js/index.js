@@ -8,7 +8,8 @@ const $cardTitle = document.querySelectorAll(".card-info-title");
 const $cartContainer = document.querySelector(".cart"); //capturo contenedor del carrito
 const $cartIcon = document.querySelector(".bxs-cart"); //capturo icono del carrito
 const $cartDropdown = document.querySelector(".cart-dropdown"); //despliege del menu del carrito
-const $cartItem = document.querySelector(".cart-item-container"); //contenedor de cada producto agregado al carrito;
+const $cartEmpty = document.querySelector(".cart-without-products"); //info carrito vacio
+const $cartItem = document.querySelector(".cart-item-container"); //contenedor con info de cada producto agregado al carrito;
 
 //*conexion con los elementos del DOM - FINAL
 
@@ -110,22 +111,17 @@ const setCart = (cart) => {
 
 const addToCart = () => {
   console.log(cartShop);
-  // $cartDropdown.classList.remove("no-products");
-  if (Object.keys(cartShop).length === 0) {
-    `  <h3 class="cart-title">Carrito de Compras</h3>
-    <p class="no-products">Aun no hay productos cargados en tu Carrito</p>
-    <div class="cart-item-container">
-    </div>`;
-  } else {
-    $cartDropdown.innerHTML = Object.values(cartShop)
-      .map((product) => templateAddToCart(product))
-      .join("");
+  if (Object.keys(cartShop).length > 0) {
+    $cartEmpty.style.display = "none";
+    // addToCart();
   }
+  $cartItem.innerHTML = Object.values(cartShop)
+    .map((product) => templateAddToCart(product))
+    .join("");
 };
 
 const templateAddToCart = (product) => {
   return `
-  <h3 class="cart-title">Carrito de Compras</h3>
   <div class="cart-column">
   <div class="cart-body">
     <img class="cart-img" src="${product.img}" alt="${product.name}">

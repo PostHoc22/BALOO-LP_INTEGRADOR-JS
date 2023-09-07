@@ -253,8 +253,115 @@ header {
   display: block;
 }
 
-/*TODO ESTILOS CARRITO Y SU MENU*/
+/*TODO ESTILOS CARRITO Y SU MENU --- INICIO*/
 /* arreglar con media query posicion a flex start para .cart */
+
+/* Estilos para el menú del carrito */
+
+.cart-show {
+  /* Agrega estilos para el aspecto del menú desplegable */
+  width: 100%;
+  min-height: 60vh;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: center;
+  background-color: rgb(250, 242, 241);
+  padding: 1rem 0rem;
+  position: absolute;
+  top: 3.7rem;
+  z-index: 2;
+}
+
+/* Estilos para ocultar menu carrito */
+.cart-dropdown {
+  visibility: hidden;
+  width: 100%;
+  height: max-content;
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: center;
+  background-color: rgb(250, 242, 241);
+  padding: 1rem 0rem;
+  position: absolute;
+  top: 3.7rem;
+  z-index: 2;
+  transform: translate(-100%);
+  transition: all 1.5s cubic-bezier(0.92, 0.01, 0.35, 0.99);
+}
+
+.cart-title {
+  font-size: 2rem;
+  margin-top: 1rem;
+  font-style: obl;
+}
+
+/* .cart-without-products {
+  font-size: 1.2rem;
+} */
+
+.cart-without-products {
+  font-size: 1.2rem;
+  width: 50%;
+  height: 50vh;
+  /* background-color: #6b6ecc; */
+  background: linear-gradient(
+    130deg,
+    rgb(142, 110, 255),
+    rgb(208, 195, 255),
+    #714aff
+  );
+  border-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 2rem;
+  /* box-shadow: 4px 4px 8px rgb(107, 110, 204); */
+  box-shadow: 4px 4px 14px rgba(54, 55, 56);
+}
+
+/*icono de bolsa de regalo del carrito*/
+.bx-shopping-bag {
+  font-size: 4rem;
+}
+
+.btn-cart {
+  border: none;
+  background: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-cart a {
+  text-align: center;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  padding: 0rem 0.1rem;
+  color: var(--text-pink);
+  font-weight: bolder;
+}
+
+.hover-underline {
+  position: relative;
+  color: var(--text-pink);
+  padding-bottom: 0.2rem;
+}
+
+/*icono flecha del carrito cuando esta vacio*/
+.bx-right-arrow-alt {
+  font-size: 2.2rem;
+  color: var(--text-pink);
+}
+
 .cart {
   display: flex;
   justify-content: center;
@@ -262,10 +369,12 @@ header {
   width: 22%;
 }
 
+/*icono carrito agrego position relative para poder posicionar la burbuja en base a este elemento*/
 .bxs-cart {
   position: relative;
 }
 
+/*burbuja de icono carrito*/
 .cart-bubble {
   position: absolute;
   bottom: 1.3rem;
@@ -288,42 +397,6 @@ header {
   flex-direction: column;
 }
 
-/* Estilos para el menú del carrito */
-.cart-show {
-  /* Agrega estilos para el aspecto del menú desplegable */
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  height: max-content;
-  gap: 2rem;
-  align-items: center;
-  background-color: rgb(250, 242, 241);
-  padding: 1rem 0rem;
-  position: absolute;
-  top: 3.7rem;
-  z-index: 2;
-}
-
-/* Estilos para ocultar menu carrito */
-.cart-dropdown {
-  visibility: hidden;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  height: max-content;
-  gap: 2rem;
-  align-items: center;
-  background-color: rgb(250, 242, 241);
-  padding: 1rem 0rem;
-  position: absolute;
-  top: 3.7rem;
-  z-index: 2;
-  transform: translate(-100%);
-  transition: all 1.5s cubic-bezier(0.92, 0.01, 0.35, 0.99);
-}
-
 .cart-body {
   width: 100%;
   display: flex;
@@ -335,6 +408,10 @@ header {
   gap: 1rem;
   border-top: 2px solid;
   border-bottom: 2px solid;
+}
+
+.cart-body * {
+  width: 16%;
 }
 
 .cart-quantity-container {
@@ -367,6 +444,8 @@ header {
   object-fit: cover;
   object-position: top center;
 }
+
+/*TODO ESTILOS CARRITO Y SU MENU --- FINAL*/
 
 /** FINAL DE ESTILOS DEL HEADER */
 
