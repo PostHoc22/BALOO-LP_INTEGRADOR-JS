@@ -301,6 +301,12 @@ header {
   font-style: obl;
 }
 
+.row-title-cart-items {
+display: flex;
+justify-content: space-around;
+width: 100%;
+}
+
 /* .cart-without-products {
   font-size: 1.2rem;
 } */

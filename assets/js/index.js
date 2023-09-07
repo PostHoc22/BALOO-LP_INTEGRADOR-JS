@@ -10,6 +10,7 @@ const $cartIcon = document.querySelector(".bxs-cart"); //capturo icono del carri
 const $cartDropdown = document.querySelector(".cart-dropdown"); //despliege del menu del carrito
 const $cartEmpty = document.querySelector(".cart-without-products"); //info carrito vacio
 const $cartItem = document.querySelector(".cart-item-container"); //contenedor con info de cada producto agregado al carrito;
+const $rowTitleCartItems = document.querySelector(".row-title-cart-items"); //titulos del carrito con productos cargados
 
 //*conexion con los elementos del DOM - FINAL
 
@@ -115,6 +116,9 @@ const addToCart = () => {
     $cartEmpty.style.display = "none";
     // addToCart();
   }
+  $rowTitleCartItems.innerHTML = `
+  <span>Producto</span> <span>Precio</span> <span>Cantidad</span> <span>Subtotal</span>
+  `
   $cartItem.innerHTML = Object.values(cartShop)
     .map((product) => templateAddToCart(product))
     .join("");
@@ -131,10 +135,11 @@ const templateAddToCart = (product) => {
     <button class="cart-product-btn-rem">-</button>
     <p class="cart-product-quantity">${product.quantity}</p>
       <button class="cart-product-btn-add">+</button>
-    </div>
+  </div>
     <p class="cart-product-subtotal">Subtotal: $300 </p>
   </div>
     <p class="cart-product-total">Total</p>
+  </div>
   </div>
   `;
 };
