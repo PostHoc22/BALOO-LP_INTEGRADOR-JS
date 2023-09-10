@@ -117,30 +117,34 @@ const addToCart = () => {
     // addToCart();
   }
   $rowTitleCartItems.innerHTML = `
-  <span>Producto</span> <span>Precio</span> <span>Cantidad</span> <span>Subtotal</span>
-  `
+  <h3>Tus Productos añadidos</h3>
+  `;
   $cartItem.innerHTML = Object.values(cartShop)
     .map((product) => templateAddToCart(product))
     .join("");
 };
 
+let valorTotal = product.price * product.quantity;
+
 const templateAddToCart = (product) => {
   return `
-  <div class="cart-column">
-  <div class="cart-body">
-    <img class="cart-img" src="${product.img}" alt="${product.name}">
-    <p class="cart-product-name"> ${product.name}</p>
-    <p class="cart-product-price">${product.price}</p>
-    <div class="cart-quantity-container">
-    <button class="cart-product-btn-rem">-</button>
-    <p class="cart-product-quantity">${product.quantity}</p>
-      <button class="cart-product-btn-add">+</button>
-  </div>
-    <p class="cart-product-subtotal">Subtotal: $300 </p>
-  </div>
-    <p class="cart-product-total">Total</p>
-  </div>
-  </div>
+  
+  <ul>
+  <li> <img src="${product.img}" alt="${product.name}"></li>
+  <li>${product.name}</li>
+  <li>${product.price}</li>
+  <li class="cart-quantity-container"> 
+      <button class="cart-product-btn-rem">
+      -
+      </button>
+      <span>${product.quantity}</span>
+      
+      <button class="cart-product-btn-add">
+      +
+      </button>
+   </li>
+  <li>Subtotal: ${product.price * product.quantity}</li>
+</ul>
   `;
 };
 

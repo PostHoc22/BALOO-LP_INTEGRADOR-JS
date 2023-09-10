@@ -296,20 +296,15 @@ header {
 }
 
 .cart-title {
+  width: 90%;
   font-size: 2rem;
   margin-top: 1rem;
-  font-style: obl;
+  font-style: oblique;
+  text-align: center;
+  border-bottom: solid 0.2rem rgba(0, 0, 0, 0.2);
+  padding-bottom: 1rem;
+  box-shadow: 0px 1px 0px rgba(204, 206, 207, 0.616);
 }
-
-.row-title-cart-items {
-display: flex;
-justify-content: space-around;
-width: 100%;
-}
-
-/* .cart-without-products {
-  font-size: 1.2rem;
-} */
 
 .cart-without-products {
   font-size: 1.2rem;
@@ -338,7 +333,7 @@ width: 100%;
   font-size: 4rem;
 }
 
-.btn-cart {
+.btn-cart-buy {
   border: none;
   background: none;
   display: flex;
@@ -347,7 +342,7 @@ width: 100%;
   align-items: center;
 }
 
-.btn-cart a {
+.btn-cart-buy a {
   text-align: center;
   font-size: 1.2rem;
   text-transform: uppercase;
@@ -397,35 +392,68 @@ width: 100%;
   font-weight: bolder;
 }
 
-.cart-item-container {
-  width: 95%;
-  display: flex;
-  flex-direction: column;
-}
-
 .cart-body {
   width: 100%;
-
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   border-top: 2px solid;
   border-bottom: 2px solid;
+  border-collapse: separate;
+  padding: 1rem 0;
+  /* border-spacing: 5rem 2rem; */
 }
 
-.cart-body * {
-  /* width: 16%; */
+.row-title-cart-items {
+  width: 90%;
+  text-align: center;
 }
 
+.cart-item-container {
+  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  justify-content: center;
+  /* padding: 1rem 0rem; */
+  border-top: solid 0.2rem rgba(0, 0, 0, 0.2);
+  border-bottom: solid 0.2rem rgba(0, 0, 0, 0.2);
+  padding-bottom: 3rem;
+  box-shadow: 0px 1px 0px rgba(204, 206, 207, 0.616);
+}
+
+.cart-item-container ul {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  padding: 2rem 0rem;
+  border-bottom: solid;
+}
+
+.cart-item-container ul li img {
+  width: 8rem;
+  height: 8rem;
+  border-radius: 1rem;
+  object-fit: cover;
+  object-position: top center;
+  box-shadow: 1px 1px 22px rgba(60, 67, 71, 0.616);
+}
 .cart-quantity-container {
   display: flex;
   flex-wrap: wrap;
-  /* justify-content: center; */
+  justify-content: center;
   align-items: center;
   gap: 0.5rem;
 }
 
 .cart-product-btn-add,
 .cart-product-btn-rem {
-  width: 2rem;
-  height: 2rem;
+  width: 1.5rem;
+  height: 1.5rem;
   font-size: 1rem;
 }
 
@@ -435,14 +463,6 @@ width: 100%;
 
 .cart-product-btn-rem {
   background-color: tomato;
-}
-
-.cart-img {
-  width: 8rem;
-  height: 8rem;
-  border-radius: 1rem;
-  object-fit: cover;
-  object-position: top center;
 }
 
 /*TODO ESTILOS CARRITO Y SU MENU --- FINAL*/
