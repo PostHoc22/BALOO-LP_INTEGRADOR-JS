@@ -21,7 +21,7 @@
   },
   {
     "nombre": "Bolso Matero",
-    "precioLista": 3750,
+    "precioLista": 3900,
     "promo": "25%",
     "descuento": 0.75,
     "imagen_01": "/assets/img/products/bolso--01.jpg",
@@ -31,7 +31,7 @@
   },
   {
     "nombre": "Contenedor de Tela",
-    "precioLista": 3125,
+    "precioLista": 3200,
     "promo": "25%",
     "descuento": 0.75,
     "imagen_01": "/assets/img/products/contenedores--01.jpg",

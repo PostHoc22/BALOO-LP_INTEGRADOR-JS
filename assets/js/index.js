@@ -11,7 +11,7 @@ const $cartDropdown = document.querySelector(".cart-dropdown"); //despliege del 
 const $cartEmpty = document.querySelector(".cart-without-products"); //info carrito vacio
 const $cartItem = document.querySelector(".cart-item-container"); //contenedor con info de cada producto agregado al carrito;
 const $rowTitleCartItems = document.querySelector(".row-title-cart-items"); //titulos del carrito con productos cargados
-
+const $cartTotalValueBuy = document.querySelector(".cart-product-total");
 //*conexion con los elementos del DOM - FINAL
 
 let cartShop = {};
@@ -33,6 +33,10 @@ const fetchData = async () => {
 };
 //*conexion a base de datos de productos: "data.json" - FINAL
 
+//TODO ----------- FUNCIONES AUXILIADORAS: INICIO-------------------
+
+//TODO ----------- FUNCIONES AUXILIADORAS: FINAL-------------------
+
 //*template para clonar tarjetas de productos
 const templateCardProduct = (product) => {
   return `
@@ -46,12 +50,12 @@ const templateCardProduct = (product) => {
           <div class="card-info">
             <h3 class="card-info-title">${product.nombre}</h3>
             <div class="card-info-buys">
-              <p class="card-info-buys-price">$ ${(
+              <p class="card-info-buys-price">${(
                 product.precioLista * product.descuento
               )
                 .toFixed(2)
                 .replace(".", ",")}</p>
-              <p class="card-info-buys-listPrice">$ ${product.precioLista}</p>
+              <p class="card-info-buys-listPrice">$${product.precioLista}</p>
             </div>
             <div class="card-info-buys-btn">
               <button class="btn-card button" data-id="${
@@ -106,33 +110,33 @@ const setCart = (cart) => {
     product.quantity = cartShop[product.id].quantity + 1;
   }
   cartShop[product.id] = { ...product };
-  // console.log(cartShop);
+  console.log(cartShop);
   addToCart();
 };
 
 const addToCart = () => {
-  console.log(cartShop);
+  // console.log(cartShop);
   if (Object.keys(cartShop).length > 0) {
     $cartEmpty.style.display = "none";
     // addToCart();
   }
   $rowTitleCartItems.innerHTML = `
-  <h3>Tus Productos añadidos</h3>
+  <h3>-- Productos Añadidos --</h3>
   `;
+  $cartItem.style.display = "grid";
+  $cartItem.style.height = "50vh";
   $cartItem.innerHTML = Object.values(cartShop)
     .map((product) => templateAddToCart(product))
     .join("");
+  templateCartProductTotal();
 };
-
-let valorTotal = product.price * product.quantity;
 
 const templateAddToCart = (product) => {
   return `
-  
-  <ul>
+    <ul>
   <li> <img src="${product.img}" alt="${product.name}"></li>
   <li>${product.name}</li>
-  <li>${product.price}</li>
+  <li>$ ${product.price}</li>
   <li class="cart-quantity-container"> 
       <button class="cart-product-btn-rem">
       -
@@ -143,9 +147,32 @@ const templateAddToCart = (product) => {
       +
       </button>
    </li>
-  <li>Subtotal: ${product.price * product.quantity}</li>
+  <li>Subtotal: $${(parseFloat(product.price.trim()) * product.quantity)
+    .toFixed(2)
+    .replace(".", ",")}</li>
 </ul>
   `;
+};
+
+const templateCartProductTotal = () => {
+  return ($cartTotalValueBuy.innerHTML = `
+    <h3>Resumen de su compra</h3>
+          <ul>
+            <li>Cantidad de Productos = </li>
+            <li>Valor Total = </li>
+          </ul>
+          <button class="btn-confirm-buy"> 
+            <span>Confirmar</span> 
+          </button>
+          <button class="btn-delete-buy">
+            <span class="text">Eliminar</span><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path
+                  d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z">
+                </path>
+              </svg>
+              </span>
+          </button>
+  `);
 };
 
 //?---- CONTENEDOR CARRITO FINAL ----

@@ -118,3 +118,90 @@
   transition: all 0.3s;
   color: var(--bc-pink);
 }
+
+/** BOTONES COMPRAR Y ELIMINAR EN RESUMEN DE COMPRA DEL CARRITO */
+
+/*boton "comprar" para confirmar compra del carrrito - inicio*/
+
+.btn-confirm-buy span {
+  cursor: pointer;
+  display: flex;
+  position: relative;
+  transition: 0.5s;
+}
+
+.btn-confirm-buy span:after {
+  content: "»";
+  position: absolute;
+  opacity: 0;
+  top: -0.8rem;
+  right: -2rem;
+  transition: 0.5s;
+  font-size: 2rem;
+}
+
+.btn-confirm-buy:hover span {
+  padding-right: 1.5rem;
+}
+
+.btn-confirm-buy:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+/*boton "eliminar" para vaciar carrrito - inicio*/
+.btn-confirm-buy:active,
+.btn-delete-buy:active {
+  transform: translateY(-3%);
+}
+
+.btn-delete-buy,
+.btn-delete-buy span {
+  transition: 200ms;
+}
+
+.btn-delete-buy .text {
+  transform: translateX(2.5rem);
+  color: white;
+  font-weight: bold;
+}
+
+.btn-delete-buy .icon {
+  position: absolute;
+  border-left: 1px solid #c41b1b;
+  transform: translateX(8.5rem);
+  height: 2rem;
+  width: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-delete-buy svg {
+  width: 1rem;
+  fill: #eee;
+}
+
+.btn-delete-buy:hover {
+  background: #ff3636;
+}
+
+.btn-delete-buy:hover .text {
+  color: transparent;
+}
+
+.btn-delete-buy:hover .icon {
+  width: 11rem;
+  border-left: none;
+  transform: translateX(0);
+}
+
+.btn-delete-buy:focus {
+  outline: none;
+}
+
+.btn-delete-buy:active .icon svg {
+  transform: scale(0.8);
+}
+
+/*boton eliminar para vaciar carrrito - final*/
