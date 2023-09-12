@@ -5,6 +5,8 @@ const $cardItem = document.querySelectorAll(".product-card-item"); // contenedor
 const $cardBtn = document.querySelectorAll(".btn-card"); //botones de card
 const $cardTitle = document.querySelectorAll(".card-info-title");
 
+//-----//---
+
 const $cartContainer = document.querySelector(".cart"); //capturo contenedor del carrito
 const $cartIcon = document.querySelector(".bxs-cart"); //capturo icono del carrito
 const $cartDropdown = document.querySelector(".cart-dropdown"); //despliege del menu del carrito
@@ -12,6 +14,7 @@ const $cartEmpty = document.querySelector(".cart-without-products"); //info carr
 const $cartItem = document.querySelector(".cart-item-container"); //contenedor con info de cada producto agregado al carrito;
 const $rowTitleCartItems = document.querySelector(".row-title-cart-items"); //titulos del carrito con productos cargados
 const $cartTotalValueBuy = document.querySelector(".cart-product-total");
+const $cartBubble = document.querySelector(".cart-bubble");
 //*conexion con los elementos del DOM - FINAL
 
 let cartShop = {};
@@ -81,56 +84,31 @@ const renderCardProducts = (data) => {
 
 //?---- CONTENEDOR CARRITO INICIO ----
 
-const toggleCart = () => {
-  //para desplegar y ocultar menu
-  $cartDropdown.classList.toggle("cart-dropdown");
-  $cartDropdown.classList.toggle("cart-show");
+//funcion que calcula la cantidad total en unidades de productos adquiridos por el usuario en el resumen de compras
+const cartTotalQuantityBuy = () => {
+  let nQuantity = Object.values(cartShop)
+    .map((cart) => cart.quantity)
+    .reduce((acc, quantity) => acc + quantity, 0);
+  return nQuantity;
 };
 
-const catchValuesCart = (e) => {
-  //para escuchar desde DOM la info de cada producto del carrito
-  if (e.target.classList.contains("btn-card")) {
-    // console.log(e.target.parentElement.parentElement.parentElement);
-    setCart(e.target.parentElement.parentElement.parentElement);
-  }
-  e.stopPropagation();
+//funcion que calcula la cantidad total en unidades de productos agregados al carrito de compra en la burbuja del carrito
+const cartBubbleQuantity = () => {
+  return ($cartBubble.textContent = cartTotalQuantityBuy());
 };
 
-const setCart = (cart) => {
-  //capturar info del producto para adherir luego al carrito
-  // console.log(cart);
-  const product = {
-    id: cart.querySelector(".btn-card").dataset.id,
-    name: cart.querySelector(".card-info-title").textContent,
-    price: cart.querySelector(".card-info-buys-price").textContent,
-    img: cart.querySelector(".card-img-back").src,
-    quantity: 1,
-  };
-  if (cartShop.hasOwnProperty(product.id)) {
-    product.quantity = cartShop[product.id].quantity + 1;
-  }
-  cartShop[product.id] = { ...product };
-  console.log(cartShop);
-  addToCart();
+//funcion que calcula el valor total de la compra realizada por el usuario
+const cartTotalValueBuy = () => {
+  let nTotal = Object.values(cartShop).reduce(
+    (acc, { price, quantity }) =>
+      parseFloat(acc) + parseFloat(price) * parseFloat(quantity),
+    0
+  );
+  nTotal = nTotal.toFixed(2).replace(".", ",");
+  return nTotal;
 };
 
-const addToCart = () => {
-  // console.log(cartShop);
-  if (Object.keys(cartShop).length > 0) {
-    $cartEmpty.style.display = "none";
-    // addToCart();
-  }
-  $rowTitleCartItems.innerHTML = `
-  <h3>-- Productos Añadidos --</h3>
-  `;
-  $cartItem.style.display = "grid";
-  $cartItem.style.height = "50vh";
-  $cartItem.innerHTML = Object.values(cartShop)
-    .map((product) => templateAddToCart(product))
-    .join("");
-  templateCartProductTotal();
-};
-
+//template para adherir los productos al carrrito de compras
 const templateAddToCart = (product) => {
   return `
     <ul>
@@ -154,12 +132,13 @@ const templateAddToCart = (product) => {
   `;
 };
 
+//template para adherir al carrito el resumen de la compra total y para confirmar la compra o vaciar el carrito
 const templateCartProductTotal = () => {
   return ($cartTotalValueBuy.innerHTML = `
     <h3>Resumen de su compra</h3>
           <ul>
-            <li>Cantidad de Productos = </li>
-            <li>Valor Total = </li>
+            <li>Cantidad de Productos = ${cartTotalQuantityBuy()} </li>
+            <li>Valor Total = $ ${cartTotalValueBuy()} </li>
           </ul>
           <button class="btn-confirm-buy"> 
             <span>Confirmar</span> 
@@ -173,6 +152,58 @@ const templateCartProductTotal = () => {
               </span>
           </button>
   `);
+};
+
+//funcion para desplegar y ocultar menu cuando sucede el evento click
+const toggleCart = () => {
+  $cartDropdown.classList.toggle("cart-dropdown");
+  $cartDropdown.classList.toggle("cart-show");
+};
+
+//funcion para capturar toda la informacion de la tarjeta del producto en la cual se desencadena el evento click en el boton "comprar" cuando lo pulsa el usuario
+const catchValuesCart = (e) => {
+  if (e.target.classList.contains("btn-card")) {
+    setCart(e.target.parentElement.parentElement.parentElement);
+  }
+  e.stopPropagation();
+};
+
+//funcion que adhiere al carrito cada producto que es comprado por el usuario (tambien maneja ciertos estilos del contenedor de cada producto dentro del carrito)
+const addToCart = () => {
+  // console.log(cartShop);
+  if (Object.keys(cartShop).length > 0) {
+    $cartEmpty.style.display = "none";
+    // addToCart();
+  }
+  $rowTitleCartItems.innerHTML = `
+  <h3>-- Productos Añadidos --</h3>
+  `;
+  $cartItem.style.display = "grid";
+  $cartItem.style.height = "50vh";
+  $cartItem.innerHTML = Object.values(cartShop)
+    .map((product) => templateAddToCart(product))
+    .join("");
+  templateCartProductTotal();
+  cartBubbleQuantity();
+};
+
+//funcion que genera un objeto con la informacion de cada producto que es comprado por el usuario para luego enviar al carrito
+const setCart = (cart) => {
+  // console.log(cart);
+  const product = {
+    id: cart.querySelector(".btn-card").dataset.id,
+    name: cart.querySelector(".card-info-title").textContent,
+    price: cart.querySelector(".card-info-buys-price").textContent,
+    img: cart.querySelector(".card-img-back").src,
+    quantity: 1,
+  };
+  if (cartShop.hasOwnProperty(product.id)) {
+    product.quantity = cartShop[product.id].quantity + 1;
+  }
+  cartShop[product.id] = { ...product };
+  // console.log(cartShop);
+  // console.log(product);
+  addToCart();
 };
 
 //?---- CONTENEDOR CARRITO FINAL ----
