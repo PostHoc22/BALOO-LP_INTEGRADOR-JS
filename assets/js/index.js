@@ -15,6 +15,9 @@ const $cartItem = document.querySelector(".cart-item-container"); //contenedor c
 const $rowTitleCartItems = document.querySelector(".row-title-cart-items"); //titulos del carrito con productos cargados
 const $cartTotalValueBuy = document.querySelector(".cart-product-total");
 const $cartBubble = document.querySelector(".cart-bubble");
+const $cartModalSuccesProduct = document.querySelector(
+  ".cart-modal-succes-product"
+); //modal con mensaje de producto agregado al carrito
 //*conexion con los elementos del DOM - FINAL
 
 let cartShop = {};
@@ -168,6 +171,16 @@ const catchValuesCart = (e) => {
   e.stopPropagation();
 };
 
+const showModalMessageAddProductSucces = (message) => {
+  $cartModalSuccesProduct.textContent = message;
+  $cartModalSuccesProduct.style.display = "block";
+
+  // Ocultar el mensaje después de 3 segundos
+  setTimeout(() => {
+    $cartModalSuccesProduct.style.display = "none";
+  }, 3000);
+};
+
 //funcion que adhiere al carrito cada producto que es comprado por el usuario (tambien maneja ciertos estilos del contenedor de cada producto dentro del carrito)
 const addToCart = () => {
   // console.log(cartShop);
@@ -185,6 +198,7 @@ const addToCart = () => {
     .join("");
   templateCartProductTotal();
   cartBubbleQuantity();
+  showModalMessageAddProductSucces("Se agregó el producto al Carrito");
 };
 
 //funcion que genera un objeto con la informacion de cada producto que es comprado por el usuario para luego enviar al carrito
