@@ -20,6 +20,8 @@ const $cartModalSuccesProduct = document.querySelector(
 ); //modal con mensaje de producto agregado al carrito
 const $btnDeleteCartBuy = document.querySelector(".empty-cart"); //para vaciar carrito
 const $btnConfirmCartBuy = document.querySelector(".confirm-buy"); // boton confirmar compra del carrito
+const $btnAddCart = document.querySelector(".cart-product-btn-add") //para boton "+" que suma unidades al producto agregado al carrito
+const $btnRemoveCart= document.querySelector(".cart-product-btn-rem") //para boton "-" que resta unidades al producto agregado al carrito
 const $modalConfirmBuyCart = document.querySelector(".modal-confirm-cart-buy"); // modal de compra confirmada
 const $closeModalConfirmBuyCart = document.querySelector(".close-modal"); // "x" para cerra modal de compra confirmada
 
@@ -142,12 +144,12 @@ const templateAddToCart = (product) => {
   <li>${product.name}</li>
   <li>$ ${product.price}</li>
   <li class="cart-quantity-container"> 
-      <button class="cart-product-btn-rem">
+      <button class="cart-product-btn-rem" data-id="${product.id}">
       -
       </button>
       <span>${product.quantity}</span>
       
-      <button class="cart-product-btn-add">
+      <button class="cart-product-btn-add" data-id="${product.id}">
       +
       </button>
    </li>
@@ -279,15 +281,23 @@ const confirmBuy = (e) => {
   // e.stopPropagation();
 };
 
-//funcion que al presionar la "x" del modal de compra confirmada, cierra al mismo y vacia el carrito
+//funcion que permite que al presionar la "x" del modal de compra confirmada, cierra al mismo y vacia el carrito
 const closeConfirmBuy = (e) => {
   if (e.target.classList.contains("close-modal")) {
     $modalConfirmBuyCart.style.display = "none";
     emptyCart();
+    cartShop = {};
   }
 };
 
 //?---- CONTENEDOR CARRITO FINAL ----
+
+const addUnitCartProduct = (e) => {
+  console.log(e.target.classList.contains("cart-product-btn-add"))
+  if (e.target.classList.contains("cart-product-btn-add")) {
+    
+  }
+}
 
 const init = () => {
   document.addEventListener("DOMContentLoaded", fetchData); //para renderizar apenas termine de cargar el browser
@@ -303,5 +313,7 @@ const init = () => {
   window.addEventListener("click", confirmBuy);
 
   window.addEventListener("click", closeConfirmBuy);
+
+  document.addEventListener("click", addUnitCartProduct);
 };
 init();
