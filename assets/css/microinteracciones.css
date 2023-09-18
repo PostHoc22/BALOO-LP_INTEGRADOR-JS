@@ -177,9 +177,11 @@
   justify-content: center;
 }
 
-.btn-delete-buy svg {
+.btn-delete-buy i {
   width: 1rem;
   fill: #eee;
+  font-size: 1.4rem;
+  transition: all 0.3s ease-in-out;
 }
 
 .btn-delete-buy:hover {
@@ -194,13 +196,14 @@
   width: 11rem;
   border-left: none;
   transform: translateX(0);
+  transition: all 0.3s ease-in-out;
 }
 
 .btn-delete-buy:focus {
   outline: none;
 }
 
-.btn-delete-buy:active .icon svg {
+.btn-delete-buy:active .icon {
   transform: scale(0.8);
 }
 

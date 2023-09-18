@@ -1,12 +1,12 @@
 //**conexion con los elementos del DOM - INICIO:
 
+//!cards:
 const $cardsContainer = document.querySelector(".product-cards-container"); //contenedor general de cards
 const $cardItem = document.querySelectorAll(".product-card-item"); // contenedor de cada card
 const $cardBtn = document.querySelectorAll(".btn-card"); //botones de card
 const $cardTitle = document.querySelectorAll(".card-info-title");
 
-//-----//---
-
+//!carrito de compras
 const $cartContainer = document.querySelector(".cart"); //capturo contenedor del carrito
 const $cartIcon = document.querySelector(".bxs-cart"); //capturo icono del carrito
 const $cartDropdown = document.querySelector(".cart-dropdown"); //despliege del menu del carrito
@@ -18,6 +18,11 @@ const $cartBubble = document.querySelector(".cart-bubble");
 const $cartModalSuccesProduct = document.querySelector(
   ".cart-modal-succes-product"
 ); //modal con mensaje de producto agregado al carrito
+const $btnDeleteCartBuy = document.querySelector(".empty-cart"); //para vaciar carrito
+const $btnConfirmCartBuy = document.querySelector(".confirm-buy"); // boton confirmar compra del carrito
+const $modalConfirmBuyCart = document.querySelector(".modal-confirm-cart-buy"); // modal de compra confirmada
+const $closeModalConfirmBuyCart = document.querySelector(".close-modal"); // "x" para cerra modal de compra confirmada
+
 //*conexion con los elementos del DOM - FINAL
 
 let cartShop = {};
@@ -87,7 +92,13 @@ const renderCardProducts = (data) => {
 
 //?---- CONTENEDOR CARRITO INICIO ----
 
-//funcion que calcula la cantidad total en unidades de productos adquiridos por el usuario en el resumen de compras
+//funcion para desplegar y ocultar menu carrito cuando sucede el evento click
+const toggleCart = () => {
+  $cartDropdown.classList.toggle("cart-dropdown");
+  $cartDropdown.classList.toggle("cart-show");
+};
+
+//funcion que calcula la cantidad total en unidades de productos adquiridos por el usuario en el contenedor "resumen de compras"
 const cartTotalQuantityBuy = () => {
   let nQuantity = Object.values(cartShop)
     .map((cart) => cart.quantity)
@@ -109,6 +120,18 @@ const cartTotalValueBuy = () => {
   );
   nTotal = nTotal.toFixed(2).replace(".", ",");
   return nTotal;
+};
+
+//template para carrito vacio:
+const templateEmptyCart = () => {
+  return `
+        <p> Aun no hay productos cargados en tu Carrito</p>
+          <i class='bx bx-shopping-bag'></i>
+          <button class="btn-cart-buy">
+            <a class="hover-underline" href="#product"> Comprar Ahora </a>
+            <i class='bx bx-right-arrow-alt bx-flashing'></i>
+          </button>
+  `;
 };
 
 //template para adherir los productos al carrrito de compras
@@ -143,27 +166,29 @@ const templateCartProductTotal = () => {
             <li>Cantidad de Productos = ${cartTotalQuantityBuy()} </li>
             <li>Valor Total = $ ${cartTotalValueBuy()} </li>
           </ul>
-          <button class="btn-confirm-buy"> 
-            <span>Confirmar</span> 
+          <button class="btn-confirm-buy confirm-buy"> 
+            <span class="confirm-buy">Confirmar</span> 
           </button>
-          <button class="btn-delete-buy">
-            <span class="text">Eliminar</span><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path
-                  d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z">
-                </path>
-              </svg>
-              </span>
+          <button class="btn-delete-buy empty-cart">
+            <span class="text empty-cart">Eliminar</span> <i class="icon bx bx-trash empty-cart"></i>
           </button>
   `);
 };
 
-//funcion para desplegar y ocultar menu cuando sucede el evento click
-const toggleCart = () => {
-  $cartDropdown.classList.toggle("cart-dropdown");
-  $cartDropdown.classList.toggle("cart-show");
+const templateModalConfirmBuy = () => {
+  return ($modalConfirmBuyCart.innerHTML = `
+    <div class="modal-content">
+    
+      <span class="close-modal">&times;</span>
+      
+       <p>Confirmamos su Pedido.</p>
+       <p>A la brevedad, uno de nuestros representantes se pondrá en contacto con usted para finalizar la compra.</p>
+    
+    </div>
+  `);
 };
 
-//funcion para capturar toda la informacion de la tarjeta del producto en la cual se desencadena el evento click en el boton "comprar" cuando lo pulsa el usuario
+//funcion que captura y envia al carrito toda la info del producto al que el usuario dio clic en el boton "comprar" de la card
 const catchValuesCart = (e) => {
   if (e.target.classList.contains("btn-card")) {
     setCart(e.target.parentElement.parentElement.parentElement);
@@ -171,22 +196,44 @@ const catchValuesCart = (e) => {
   e.stopPropagation();
 };
 
+//funcion para mostrar mensaje una vez que se agrego el producot al carrito:
 const showModalMessageAddProductSucces = (message) => {
   $cartModalSuccesProduct.textContent = message;
   $cartModalSuccesProduct.style.display = "block";
 
-  // Ocultar el mensaje después de 3 segundos
+  // Ocultar el mensaje después de 1 segundo
   setTimeout(() => {
     $cartModalSuccesProduct.style.display = "none";
-  }, 3000);
+  }, 1000);
+};
+
+//funcion que elimina el carrito y resetea el contador de la burbuja del icono carrito ubicado en la barra de navegacion:
+const emptyCart = () => {
+  $cartEmpty.style.display = "flex";
+  $rowTitleCartItems.style.display = "none";
+  $cartItem.style.display = "none";
+  $cartTotalValueBuy.style.display = "none";
+  $cartBubble.textContent = "0";
+};
+
+//funcion que conecta el evento del boton "eliminar" de la seccion "resumen de compras" para posteriormente poder eliminar el carrito
+const clearCart = (e) => {
+  // console.log(e.target.classList.contains("empty-cart"));
+  if (e.target.classList.contains("empty-cart")) {
+    // emptyCart(e.target.parentElement.parentElement.parentElement);
+    cartShop = {};
+    emptyCart();
+  }
+  // e.stopPropagation();
 };
 
 //funcion que adhiere al carrito cada producto que es comprado por el usuario (tambien maneja ciertos estilos del contenedor de cada producto dentro del carrito)
 const addToCart = () => {
   // console.log(cartShop);
+  if (Object.keys(cartShop).length === 0)
+    return ($cartEmpty.innerHTML = templateEmptyCart());
   if (Object.keys(cartShop).length > 0) {
     $cartEmpty.style.display = "none";
-    // addToCart();
   }
   $rowTitleCartItems.innerHTML = `
   <h3>-- Productos Añadidos --</h3>
@@ -196,6 +243,7 @@ const addToCart = () => {
   $cartItem.innerHTML = Object.values(cartShop)
     .map((product) => templateAddToCart(product))
     .join("");
+  $cartTotalValueBuy.style.display = "flex";
   templateCartProductTotal();
   cartBubbleQuantity();
   showModalMessageAddProductSucces("Se agregó el producto al Carrito");
@@ -220,6 +268,25 @@ const setCart = (cart) => {
   addToCart();
 };
 
+//funcion con la cual al presionar el boton "confirmar" de resumen de compra del carrito, muestra un modal de confirmacion de compra ok
+const confirmBuy = (e) => {
+  // console.log(e.target.classList.contains("confirm-buy"));
+  if (e.target.classList.contains("confirm-buy")) {
+    // emptyCart(e.target.parentElement.parentElement.parentElement);
+    templateModalConfirmBuy();
+    $modalConfirmBuyCart.style.display = "flex";
+  }
+  // e.stopPropagation();
+};
+
+//funcion que al presionar la "x" del modal de compra confirmada, cierra al mismo y vacia el carrito
+const closeConfirmBuy = (e) => {
+  if (e.target.classList.contains("close-modal")) {
+    $modalConfirmBuyCart.style.display = "none";
+    emptyCart();
+  }
+};
+
 //?---- CONTENEDOR CARRITO FINAL ----
 
 const init = () => {
@@ -227,6 +294,14 @@ const init = () => {
 
   $cartIcon.addEventListener("click", toggleCart); //para desplegar carrito
 
+  document.addEventListener("DOMContentLoaded", addToCart); //para traer contenedor carrito (vacio o con productos)
+
   $cardsContainer.addEventListener("click", catchValuesCart); //para escuchar del DOM evento click con la info de cada producto del carrito
+
+  window.addEventListener("click", clearCart);
+
+  window.addEventListener("click", confirmBuy);
+
+  window.addEventListener("click", closeConfirmBuy);
 };
 init();
