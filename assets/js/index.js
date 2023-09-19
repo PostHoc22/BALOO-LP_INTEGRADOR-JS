@@ -20,8 +20,8 @@ const $cartModalSuccesProduct = document.querySelector(
 ); //modal con mensaje de producto agregado al carrito
 const $btnDeleteCartBuy = document.querySelector(".empty-cart"); //para vaciar carrito
 const $btnConfirmCartBuy = document.querySelector(".confirm-buy"); // boton confirmar compra del carrito
-const $btnAddCart = document.querySelector(".cart-product-btn-add") //para boton "+" que suma unidades al producto agregado al carrito
-const $btnRemoveCart= document.querySelector(".cart-product-btn-rem") //para boton "-" que resta unidades al producto agregado al carrito
+const $btnAddCart = document.querySelector(".cart-product-btn-add"); //para boton "+" que suma unidades al producto agregado al carrito
+const $btnRemoveCart = document.querySelector(".cart-product-btn-rem"); //para boton "-" que resta unidades al producto agregado al carrito
 const $modalConfirmBuyCart = document.querySelector(".modal-confirm-cart-buy"); // modal de compra confirmada
 const $closeModalConfirmBuyCart = document.querySelector(".close-modal"); // "x" para cerra modal de compra confirmada
 
@@ -229,8 +229,25 @@ const clearCart = (e) => {
   // e.stopPropagation();
 };
 
+//funcion que elimina el item del producto cargado en carrito cuando su cantidad es cero al presionar el boton "-"
+const deleteItemCart = () => {
+  const validProducts = Object.values(cartShop).filter(
+    (product) => product.quantity > 0
+  );
+  if (validProducts.length === 0) {
+    // Si no hay productos válidos, mostrar carrito vacío
+    $cartEmpty.innerHTML = templateEmptyCart();
+    $cartEmpty.style.display = "flex";
+    $rowTitleCartItems.style.display = "none";
+    $cartItem.style.display = "none";
+    $cartTotalValueBuy.style.display = "none";
+    $cartBubble.textContent = "0";
+  }
+};
+
 //funcion que adhiere al carrito cada producto que es comprado por el usuario (tambien maneja ciertos estilos del contenedor de cada producto dentro del carrito)
 const addToCart = () => {
+  deleteItemCart();
   // console.log(cartShop);
   if (Object.keys(cartShop).length === 0)
     return ($cartEmpty.innerHTML = templateEmptyCart());
@@ -270,6 +287,36 @@ const setCart = (cart) => {
   addToCart();
 };
 
+//funcion que adhiere una unidad mas al item de cada producto cargado en el carrito cuando se presiona el boton "+"
+const addUnitCartProduct = (e) => {
+  // console.log(e.target.classList.contains("cart-product-btn-add"));
+  if (e.target.classList.contains("cart-product-btn-add")) {
+    // console.log(e.target.dataset.id);
+    const product = cartShop[e.target.dataset.id];
+    product.quantity++;
+    cartShop[e.target.dataset.id] = { ...product };
+    addToCart();
+  }
+  // e.stopPropagation();
+};
+
+//funcion que resta una unidad mas al item de cada producto cargado en el carrito cuando se presiona el boton "-"
+const removeUnitCartProduct = (e) => {
+  // console.log(e.target.classList.contains("cart-product-btn-add"));
+  if (e.target.classList.contains("cart-product-btn-rem")) {
+    // console.log(e.target.dataset.id);
+    const product = cartShop[e.target.dataset.id];
+    product.quantity--;
+    // cartShop[e.target.dataset.id] = { ...product };
+    if (product.quantity === 0) {
+      delete cartShop[e.target.dataset.id];
+    }
+    addToCart();
+    showModalMessageAddProductSucces("Se quito una unidad del producto");
+  }
+  // e.stopPropagation();
+};
+
 //funcion con la cual al presionar el boton "confirmar" de resumen de compra del carrito, muestra un modal de confirmacion de compra ok
 const confirmBuy = (e) => {
   // console.log(e.target.classList.contains("confirm-buy"));
@@ -278,7 +325,7 @@ const confirmBuy = (e) => {
     templateModalConfirmBuy();
     $modalConfirmBuyCart.style.display = "flex";
   }
-  // e.stopPropagation();
+  e.stopPropagation();
 };
 
 //funcion que permite que al presionar la "x" del modal de compra confirmada, cierra al mismo y vacia el carrito
@@ -288,16 +335,10 @@ const closeConfirmBuy = (e) => {
     emptyCart();
     cartShop = {};
   }
+  e.stopPropagation();
 };
 
 //?---- CONTENEDOR CARRITO FINAL ----
-
-const addUnitCartProduct = (e) => {
-  console.log(e.target.classList.contains("cart-product-btn-add"))
-  if (e.target.classList.contains("cart-product-btn-add")) {
-    
-  }
-}
 
 const init = () => {
   document.addEventListener("DOMContentLoaded", fetchData); //para renderizar apenas termine de cargar el browser
@@ -308,12 +349,14 @@ const init = () => {
 
   $cardsContainer.addEventListener("click", catchValuesCart); //para escuchar del DOM evento click con la info de cada producto del carrito
 
-  window.addEventListener("click", clearCart);
+  document.addEventListener("click", clearCart); //para eliminar items de productos del carrito de compras
 
-  window.addEventListener("click", confirmBuy);
+  document.addEventListener("click", addUnitCartProduct); //para adherir items de productos desde el boton "+" del carrito de compras
 
-  window.addEventListener("click", closeConfirmBuy);
+  document.addEventListener("click", removeUnitCartProduct); //para remover items de productos desde el boton "-" del carrito de compras
 
-  document.addEventListener("click", addUnitCartProduct);
+  window.addEventListener("click", confirmBuy); //para abrir modal de compra confirmada luego de presionar el boton "confirmar" en resumen de compras del carrito
+
+  window.addEventListener("click", closeConfirmBuy); //para cerrar modal de compra confirmada en resumen de compras del carrito
 };
 init();
