@@ -27,9 +27,10 @@ const $closeModalConfirmBuyCart = document.querySelector(".close-modal"); // "x"
 
 //*conexion con los elementos del DOM - FINAL
 
-let cartShop = {};
-
 //---------------------------------------------------
+
+//declaracion del carrito de compras, el cual puede ser un objeto  vacio o puede ontener productos almacenados en Local Storage
+let cartShop = {};
 
 //? ---- CONTENEDOR CARDS INICIO ----
 
@@ -93,6 +94,20 @@ const renderCardProducts = (data) => {
 //-------------------------------------
 
 //?---- CONTENEDOR CARRITO INICIO ----
+
+const cartInfo = () => {
+  // fetchData();
+  if (localStorage.getItem("cart")) {
+    cartShop = JSON.parse(localStorage.getItem("cart"));
+    // addToCart();
+
+    if (Object.keys(cartShop).length === 0) return clearCart();
+  }
+};
+
+const saveCartShop = () => {
+  localStorage.setItem("cart", JSON.stringify(cartShop));
+};
 
 //funcion para desplegar y ocultar menu carrito cuando sucede el evento click
 const toggleCart = () => {
@@ -216,6 +231,7 @@ const emptyCart = () => {
   $cartItem.style.display = "none";
   $cartTotalValueBuy.style.display = "none";
   $cartBubble.textContent = "0";
+  localStorage.removeItem("cart");
 };
 
 //funcion que conecta el evento del boton "eliminar" de la seccion "resumen de compras" para posteriormente poder eliminar el carrito
@@ -223,8 +239,9 @@ const clearCart = (e) => {
   // console.log(e.target.classList.contains("empty-cart"));
   if (e.target.classList.contains("empty-cart")) {
     // emptyCart(e.target.parentElement.parentElement.parentElement);
-    cartShop = {};
     emptyCart();
+    cartShop = {};
+    templateEmptyCart();
   }
   // e.stopPropagation();
 };
@@ -237,11 +254,7 @@ const deleteItemCart = () => {
   if (validProducts.length === 0) {
     // Si no hay productos válidos, mostrar carrito vacío
     $cartEmpty.innerHTML = templateEmptyCart();
-    $cartEmpty.style.display = "flex";
-    $rowTitleCartItems.style.display = "none";
-    $cartItem.style.display = "none";
-    $cartTotalValueBuy.style.display = "none";
-    $cartBubble.textContent = "0";
+    emptyCart();
   }
 };
 
@@ -266,6 +279,7 @@ const addToCart = () => {
   templateCartProductTotal();
   cartBubbleQuantity();
   showModalMessageAddProductSucces("Se agregó el producto al Carrito");
+  saveCartShop();
 };
 
 //funcion que genera un objeto con la informacion de cada producto que es comprado por el usuario para luego enviar al carrito
@@ -311,6 +325,7 @@ const removeUnitCartProduct = (e) => {
     if (product.quantity === 0) {
       delete cartShop[e.target.dataset.id];
     }
+    localStorage.removeItem("cart");
     addToCart();
     showModalMessageAddProductSucces("Se quito una unidad del producto");
   }
@@ -332,8 +347,8 @@ const confirmBuy = (e) => {
 const closeConfirmBuy = (e) => {
   if (e.target.classList.contains("close-modal")) {
     $modalConfirmBuyCart.style.display = "none";
-    emptyCart();
     cartShop = {};
+    emptyCart();
   }
   e.stopPropagation();
 };
@@ -341,7 +356,9 @@ const closeConfirmBuy = (e) => {
 //?---- CONTENEDOR CARRITO FINAL ----
 
 const init = () => {
-  document.addEventListener("DOMContentLoaded", fetchData); //para renderizar apenas termine de cargar el browser
+  document.addEventListener("DOMContentLoaded", cartInfo);
+
+  document.addEventListener("DOMContentLoaded", fetchData); //para renderizar info de productos apenas termine de cargar el browser
 
   $cartIcon.addEventListener("click", toggleCart); //para desplegar carrito
 
