@@ -557,7 +557,8 @@ header {
 
 /* -------- modal confirmar compra del carrito --------*/
 
-.modal-confirm-cart-buy {
+.modal-confirm-cart-buy,
+.modal-delete-cart-buy {
   display: none;
   position: fixed;
   z-index: 2;
@@ -590,7 +591,8 @@ header {
   text-align: center;
 }
 
-.close-modal {
+.close-modal,
+.close-modal-delete {
   color: #aaa;
   text-align: right;
   font-size: 2rem;

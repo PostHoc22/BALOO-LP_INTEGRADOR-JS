@@ -1,12 +1,13 @@
 //**conexion con los elementos del DOM - INICIO:
 
-//!cards:
+//!-------- cards: -------------
 const $cardsContainer = document.querySelector(".product-cards-container"); //contenedor general de cards
 const $cardItem = document.querySelectorAll(".product-card-item"); // contenedor de cada card
 const $cardBtn = document.querySelectorAll(".btn-card"); //botones de card
 const $cardTitle = document.querySelectorAll(".card-info-title");
+//!-------- cards: -------------
 
-//!carrito de compras
+//! -------- carrito de compras --------
 const $cartContainer = document.querySelector(".cart"); //capturo contenedor del carrito
 const $cartIcon = document.querySelector(".bxs-cart"); //capturo icono del carrito
 const $cartDropdown = document.querySelector(".cart-dropdown"); //despliege del menu del carrito
@@ -23,7 +24,16 @@ const $btnConfirmCartBuy = document.querySelector(".confirm-buy"); // boton conf
 const $btnAddCart = document.querySelector(".cart-product-btn-add"); //para boton "+" que suma unidades al producto agregado al carrito
 const $btnRemoveCart = document.querySelector(".cart-product-btn-rem"); //para boton "-" que resta unidades al producto agregado al carrito
 const $modalConfirmBuyCart = document.querySelector(".modal-confirm-cart-buy"); // modal de compra confirmada
-const $closeModalConfirmBuyCart = document.querySelector(".close-modal"); // "x" para cerra modal de compra confirmada
+const $closeModalConfirmBuyCart = document.querySelector(".close-modal"); // "x" para cerrar modal de compra confirmada
+const $modalDeleteBuyCart = document.querySelector(".modal-delete-cart-buy"); // modal vaciar carrito ok
+//! -------- carrito de compras --------
+//----
+
+//! -------- menu hamburguesa ----------
+const $menuIcon = document.querySelector(".bx-menu"); //capturo icono del menu
+
+const $menuDropdown = document.querySelector(".navbar-dropdown"); //despliege del menu del carrito
+//! -------- menu hamburguesa ----------
 
 //*conexion con los elementos del DOM - FINAL
 
@@ -93,18 +103,33 @@ const renderCardProducts = (data) => {
 //-------------------------------------
 //-------------------------------------
 
+//?---- CONTENEDOR MENU-TOGGLE INICIO ----
+
+//funcion para desplegar y ocultar menu hamburgeusa cuando sucede el evento click
+const toggleMenu = () => {
+  $cartDropdown.classList.add("navbar-toggle");
+  $cartDropdown.classList.remove("navbar-toggle");
+};
+
+//?---- CONTENEDOR MENU-TOGGLE FINAL ----
+
+//-------------------------------------
+//-------------------------------------
+
 //?---- CONTENEDOR CARRITO INICIO ----
 
+//funcion que trae los productos del carrito que esta almacenados en local storage
 const cartInfo = () => {
-  // fetchData();
+  fetchData();
   if (localStorage.getItem("cart")) {
     cartShop = JSON.parse(localStorage.getItem("cart"));
-    // addToCart();
-
-    if (Object.keys(cartShop).length === 0) return clearCart();
+    showModalMessageAddProductSucces(
+      "Existen productos cargados en tu Carrito"
+    );
   }
 };
 
+//funcion que almacena los productos cargados en el carrito en el local storage
 const saveCartShop = () => {
   localStorage.setItem("cart", JSON.stringify(cartShop));
 };
@@ -140,16 +165,16 @@ const cartTotalValueBuy = () => {
 };
 
 //template para carrito vacio:
-const templateEmptyCart = () => {
-  return `
-        <p> Aun no hay productos cargados en tu Carrito</p>
-          <i class='bx bx-shopping-bag'></i>
-          <button class="btn-cart-buy">
-            <a class="hover-underline" href="#product"> Comprar Ahora </a>
-            <i class='bx bx-right-arrow-alt bx-flashing'></i>
-          </button>
-  `;
-};
+// const templateEmptyCart = () => {
+//   return `
+//         <p> Aun no hay productos cargados en tu Carrito</p>
+//           <i class='bx bx-shopping-bag'></i>
+//           <button class="btn-cart-buy">
+//             <a class="hover-underline" href="#product"> Comprar Ahora </a>
+//             <i class='bx bx-right-arrow-alt bx-flashing'></i>
+//           </button>
+//   `;
+// };
 
 //template para adherir los productos al carrrito de compras
 const templateAddToCart = (product) => {
@@ -192,6 +217,7 @@ const templateCartProductTotal = () => {
   `);
 };
 
+//template para mostrar ventana con mensaje de confirmacion de la compra luego de pulsar el boton "confirmar" del resumen de compras del carrito:
 const templateModalConfirmBuy = () => {
   return ($modalConfirmBuyCart.innerHTML = `
     <div class="modal-content">
@@ -205,6 +231,23 @@ const templateModalConfirmBuy = () => {
   `);
 };
 
+//template para mostrar ventana con mensaje de confirmacion de la compra luego de pulsar el boton "confirmar" del resumen de compras del carrito:
+const templateModalDeleteBuy = () => {
+  return ($modalDeleteBuyCart.innerHTML = `
+    <div class="modal-content">
+    
+      <span class="close-modal-delete">&times;</span>
+      
+       <p>Atencion: esta a punto de eliminar su carrito de compras.</p>
+
+       <button class="btn-delete-buy empty-cart delete-cart">
+            <span class="text empty-cart delete-cart">Confirmar</span> <i class="icon bx bx-run bx-flashing empty-cart delete-cart"></i>
+          </button>
+    
+    </div>
+  `);
+};
+
 //funcion que captura y envia al carrito toda la info del producto al que el usuario dio clic en el boton "comprar" de la card
 const catchValuesCart = (e) => {
   if (e.target.classList.contains("btn-card")) {
@@ -213,15 +256,15 @@ const catchValuesCart = (e) => {
   e.stopPropagation();
 };
 
-//funcion para mostrar mensaje una vez que se agrego el producot al carrito:
+//funcion para mostrar mensaje una vez que se agrego el producto al carrito:
 const showModalMessageAddProductSucces = (message) => {
   $cartModalSuccesProduct.textContent = message;
   $cartModalSuccesProduct.style.display = "block";
 
-  // Ocultar el mensaje después de 1 segundo
+  // Ocultar el mensaje después de 2 segundos
   setTimeout(() => {
     $cartModalSuccesProduct.style.display = "none";
-  }, 1000);
+  }, 2000);
 };
 
 //funcion que elimina el carrito y resetea el contador de la burbuja del icono carrito ubicado en la barra de navegacion:
@@ -234,14 +277,14 @@ const emptyCart = () => {
   localStorage.removeItem("cart");
 };
 
-//funcion que conecta el evento del boton "eliminar" de la seccion "resumen de compras" para posteriormente poder eliminar el carrito
+//funcion que conecta el evento del boton "eliminar" de la seccion "resumen de compras" para posteriormente mostrar modal de "eliminar carrito de compras"
 const clearCart = (e) => {
   // console.log(e.target.classList.contains("empty-cart"));
   if (e.target.classList.contains("empty-cart")) {
     // emptyCart(e.target.parentElement.parentElement.parentElement);
-    emptyCart();
-    cartShop = {};
-    templateEmptyCart();
+    templateModalDeleteBuy();
+    deleteBuy();
+    // emptyCart();
   }
   // e.stopPropagation();
 };
@@ -253,7 +296,6 @@ const deleteItemCart = () => {
   );
   if (validProducts.length === 0) {
     // Si no hay productos válidos, mostrar carrito vacío
-    $cartEmpty.innerHTML = templateEmptyCart();
     emptyCart();
   }
 };
@@ -262,24 +304,21 @@ const deleteItemCart = () => {
 const addToCart = () => {
   deleteItemCart();
   // console.log(cartShop);
-  if (Object.keys(cartShop).length === 0)
-    return ($cartEmpty.innerHTML = templateEmptyCart());
   if (Object.keys(cartShop).length > 0) {
     $cartEmpty.style.display = "none";
-  }
-  $rowTitleCartItems.innerHTML = `
+    $rowTitleCartItems.innerHTML = `
   <h3>-- Productos Añadidos --</h3>
   `;
-  $cartItem.style.display = "grid";
-  $cartItem.style.height = "50vh";
-  $cartItem.innerHTML = Object.values(cartShop)
-    .map((product) => templateAddToCart(product))
-    .join("");
-  $cartTotalValueBuy.style.display = "flex";
-  templateCartProductTotal();
-  cartBubbleQuantity();
-  showModalMessageAddProductSucces("Se agregó el producto al Carrito");
-  saveCartShop();
+    $cartItem.style.display = "grid";
+    $cartItem.style.height = "50vh";
+    $cartItem.innerHTML = Object.values(cartShop)
+      .map((product) => templateAddToCart(product))
+      .join("");
+    $cartTotalValueBuy.style.display = "flex";
+    templateCartProductTotal();
+    cartBubbleQuantity();
+    saveCartShop();
+  }
 };
 
 //funcion que genera un objeto con la informacion de cada producto que es comprado por el usuario para luego enviar al carrito
@@ -299,6 +338,7 @@ const setCart = (cart) => {
   // console.log(cartShop);
   // console.log(product);
   addToCart();
+  showModalMessageAddProductSucces("Se agregó el producto al Carrito");
 };
 
 //funcion que adhiere una unidad mas al item de cada producto cargado en el carrito cuando se presiona el boton "+"
@@ -330,6 +370,34 @@ const removeUnitCartProduct = (e) => {
     showModalMessageAddProductSucces("Se quito una unidad del producto");
   }
   // e.stopPropagation();
+};
+
+//funcion que solicita, a traves de un mensaje, confirmacion para vaciar productos carrito luego de pulsar el boton "eliminar" en el resumen de compras del carrito:
+const deleteBuy = (e) => {
+  // console.log(e.target.classList.contains("confirm-buy"));
+  if (e.target.classList.contains("empty-cart")) {
+    // emptyCart(e.target.parentElement.parentElement.parentElement);
+    $modalDeleteBuyCart.style.display = "flex";
+    templateModalDeleteBuy();
+  }
+  e.stopPropagation();
+};
+
+//funcion que permite volver atras al presionar boton "x" del modal eliminar carrito de compras. Mantiene cargados los productos en el carrito
+const closeDeleteBuy = (e) => {
+  if (e.target.classList.contains("close-modal-delete")) {
+    $modalDeleteBuyCart.style.display = "none";
+  }
+  e.stopPropagation();
+};
+
+//funcion que permite que al presionar boton "Confirmar" del modal para eliminar compra en resumen de compra, cierra al mismo y vacia el carrito
+const confirmDeleteBuy = (e) => {
+  if (e.target.classList.contains("delete-cart")) {
+    $modalDeleteBuyCart.style.display = "none";
+    emptyCart();
+  }
+  e.stopPropagation();
 };
 
 //funcion con la cual al presionar el boton "confirmar" de resumen de compra del carrito, muestra un modal de confirmacion de compra ok
@@ -375,5 +443,13 @@ const init = () => {
   window.addEventListener("click", confirmBuy); //para abrir modal de compra confirmada luego de presionar el boton "confirmar" en resumen de compras del carrito
 
   window.addEventListener("click", closeConfirmBuy); //para cerrar modal de compra confirmada en resumen de compras del carrito
+
+  window.addEventListener("click", deleteBuy); //para abrir modal de vaciar carrito luego de presionar el boton "eliminar" en resumen de compras del carrito
+
+  window.addEventListener("click", closeDeleteBuy); //para cerrar modal de vaciar carrito luego de presionar el boton "confirmar"
+
+  window.addEventListener("click", confirmDeleteBuy);
+
+  $menuIcon.addEventListener("click", toggleMenu);
 };
 init();
