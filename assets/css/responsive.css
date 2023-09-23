@@ -241,6 +241,18 @@
   }
 
   @media (max-width: 384px) {
+    /* ? ----- CONTENEDOR CARRITO CON PRODUCTOS CARGADOS ----- */
+    .cart-item-container {
+      width: 95%;
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .cart-item-container ul {
+      font-size: 1rem;
+    }
+    .cart-item-container ul li img {
+      width: 5rem;
+      height: 6rem;
+    }
     /* ? ---------- HERO ---------- */
     .hero-banner-data {
       justify-content: space-between;

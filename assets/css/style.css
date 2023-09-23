@@ -430,9 +430,10 @@ header {
   /* padding: 1rem 0rem; */
   border-top: solid 0.2rem rgba(0, 0, 0, 0.2);
   border-bottom: solid 0.2rem rgba(0, 0, 0, 0.2);
-  padding-bottom: 3rem;
+  padding-bottom: 2rem;
   box-shadow: 0px 1px 0px rgba(204, 206, 207, 0.616);
   overflow-y: auto;
+  gap: 0.5rem;
 }
 
 .cart-item-container ul {
@@ -441,12 +442,20 @@ header {
   flex-wrap: wrap;
   gap: 0.5rem;
   align-items: center;
+  justify-content: space-between;
   padding: 1.5rem 0rem;
   border-bottom: solid;
+  text-align: center;
+}
+
+.cart-item-container ul li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .cart-item-container ul li img {
-  width: 8rem;
+  width: 6rem;
   height: 8rem;
   border-radius: 1rem;
   object-fit: cover;
