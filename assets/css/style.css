@@ -159,7 +159,7 @@ header {
 }
 .navbar {
   width: 100%;
-  padding: 0.5rem 0;
+  padding: 0.5rem;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -169,21 +169,26 @@ header {
   background-image: var(--bg-navbar);
   position: relative;
 }
-.navbar-dropdown {
+
+.menu {
   width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  gap: 0.5rem;
 }
-/* checkbox  */
-#navbar-toggle {
-  display: none;
+
+.menu-show {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
+
 /* elemento padre del icono menu */
 .navbar-toggle-label {
   display: none;
 }
+
 /* dimensiones y transicion para macrointeraccion para iconos "menu", "user" y "cart" */
 .bx-menu,
 .bxs-user,
@@ -193,12 +198,13 @@ header {
   cursor: pointer;
   padding: 0.2rem 0.2rem;
 }
+
 #navbar-search {
-  width: 20%;
+  width: 24%;
   height: 1.5rem;
   border: none;
   border-bottom: 2px solid;
-  padding-left: 1rem;
+  padding-left: 0.5rem;
   border-radius: 0.5rem;
   transition: 0.5s ease-out all;
   cursor: pointer;
@@ -237,6 +243,7 @@ header {
 .login-dropdown-item a {
   font-size: var(--font-size-login-item);
   color: var(--text-gray-dark);
+  width: max-content;
 }
 /* .glass {
   position: absolute;
@@ -249,9 +256,6 @@ header {
   -webkit-backdrop-filter: blur(5px);
   display: none;
 } */
-#navbar-toggle:checked ~ .glass {
-  display: block;
-}
 
 /*TODO ESTILOS CARRITO Y SU MENU --- INICIO*/
 /* arreglar con media query posicion a flex start para .cart */
@@ -261,7 +265,7 @@ header {
 .cart-show {
   /* Agrega estilos para el aspecto del menú desplegable */
   width: 100%;
-  min-height: 60vh;
+  min-height: 50vh;
   height: max-content;
   display: flex;
   flex-direction: column;
@@ -272,7 +276,9 @@ header {
   padding: 1rem 0rem;
   position: absolute;
   top: 3.7rem;
+  left: 0;
   z-index: 2;
+  /* display: none; */
 }
 
 /* Estilos para ocultar menu carrito */
@@ -308,8 +314,8 @@ header {
 
 .cart-without-products {
   font-size: 1.2rem;
-  width: 40%;
-  height: 40vh;
+  width: 50%;
+  height: 50vh;
   /* background-color: #6b6ecc; */
   background: linear-gradient(
     130deg,
@@ -323,8 +329,7 @@ header {
   justify-content: center;
   align-items: center;
   text-align: center;
-  gap: 1rem;
-  /* box-shadow: 4px 4px 8px rgb(107, 110, 204); */
+  gap: 1.5rem;
   box-shadow: 4px 4px 14px rgba(54, 55, 56);
 }
 
@@ -367,7 +372,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 22%;
+  width: 10%;
 }
 
 /*icono carrito agrego position relative para poder posicionar la burbuja en base a este elemento*/

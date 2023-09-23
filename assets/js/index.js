@@ -32,7 +32,9 @@ const $modalDeleteBuyCart = document.querySelector(".modal-delete-cart-buy"); //
 //! -------- menu hamburguesa ----------
 const $menuIcon = document.querySelector(".bx-menu"); //capturo icono del menu
 
-const $menuDropdown = document.querySelector(".navbar-dropdown"); //despliege del menu del carrito
+const $menu = document.querySelector(".menu"); // contenedor menu
+
+const $menuShow = document.querySelector(".menu-show"); // para desplegar menu hamburguesa
 //! -------- menu hamburguesa ----------
 
 //*conexion con los elementos del DOM - FINAL
@@ -107,8 +109,8 @@ const renderCardProducts = (data) => {
 
 //funcion para desplegar y ocultar menu hamburgeusa cuando sucede el evento click
 const toggleMenu = () => {
-  $cartDropdown.classList.add("navbar-toggle");
-  $cartDropdown.classList.remove("navbar-toggle");
+  $menu.classList.toggle("menu-show");
+  $menu.classList.toggle("menu");
 };
 
 //?---- CONTENEDOR MENU-TOGGLE FINAL ----

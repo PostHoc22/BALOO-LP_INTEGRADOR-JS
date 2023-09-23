@@ -191,12 +191,12 @@
 }
 /** llamados a las animaciones: */
 /* para apertura de menu-toogle */
-#navbar-toggle:checked + .navbar-dropdown {
+.menu-show {
   animation: toogle-slide-left-in 1s ease-in-out forwards,
     opacity-loadPage-toogle 1s ease-in;
 }
 /* para cierre de menu-toogle */
-.navbar-dropdown {
+.menu {
   animation: toogle-slide-left-out 1s ease-in-out,
     opacity-loadPage-toogle 1s ease-in;
 }
