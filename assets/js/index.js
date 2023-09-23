@@ -320,6 +320,8 @@ const addToCart = () => {
     templateCartProductTotal();
     cartBubbleQuantity();
     saveCartShop();
+  } else {
+    emptyCart();
   }
 };
 
@@ -398,6 +400,8 @@ const confirmDeleteBuy = (e) => {
   if (e.target.classList.contains("delete-cart")) {
     $modalDeleteBuyCart.style.display = "none";
     emptyCart();
+    cartShop = {};
+    // localStorage.removeItem("cart");
   }
   e.stopPropagation();
 };
@@ -417,8 +421,9 @@ const confirmBuy = (e) => {
 const closeConfirmBuy = (e) => {
   if (e.target.classList.contains("close-modal")) {
     $modalConfirmBuyCart.style.display = "none";
-    cartShop = {};
+    deleteItemCart();
     emptyCart();
+    cartShop = {};
   }
   e.stopPropagation();
 };

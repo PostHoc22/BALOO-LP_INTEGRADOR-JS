@@ -332,6 +332,9 @@ header {
   gap: 1.5rem;
   box-shadow: 4px 4px 14px rgba(54, 55, 56);
 }
+.cart-without-products p {
+  line-height: 1.2rem;
+}
 
 /*icono de bolsa de regalo del carrito*/
 .bx-shopping-bag {
