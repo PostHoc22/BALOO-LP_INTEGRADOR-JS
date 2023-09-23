@@ -145,6 +145,10 @@
     width: 80%;
     justify-content: flex-end;
   }
+  /* ? ---------- HEADER ---------- */
+  .cart-show {
+    top: 3rem;
+  }
 }
 
 @media (max-width: 686px) {
