@@ -324,21 +324,21 @@
   .bx-right-arrow-alt {
     font-size: 1.5rem;
   }
-}
-/* ? ---------- HERO ---------- */
-.hero-banner-data-title {
-  font-size: 1rem;
-}
-/* ? ---------- HERO ---------- */
-.hero-banner-data-slogan {
-  font-size: 0.5rem;
-  line-height: 1rem;
-  padding-top: 1rem;
-}
-/* ? ---------- HERO ---------- */
-.hero-banner-data {
-  min-block-size: none;
-  bottom: 1rem;
+  /* ? ---------- HERO ---------- */
+  .hero-banner-data-title {
+    font-size: 1rem;
+  }
+  /* ? ---------- HERO ---------- */
+  .hero-banner-data-slogan {
+    font-size: 0.5rem;
+    line-height: 1rem;
+    padding-top: 1rem;
+  }
+  /* ? ---------- HERO ---------- */
+  .hero-banner-data {
+    min-block-size: none;
+    bottom: 1rem;
+  }
 }
 
 @media (max-width: 204px) {
