@@ -244,3 +244,23 @@
   animation-delay: 2s;
 }
 /*?--- ANIMACION PARA SECTION HERO - FINAL --- */
+
+/*?--- ANIMACION MENSAJE PRODUCTO AGREGADO O REMOVIDO DEL CARRITO - INICIO --- */
+/** declaraciones: */
+/* para desplazar de abajo hacia arriba el div con mensaje de producto agregado o removido del carrito */
+@keyframes slide-up-display-cart-message {
+  from {
+    opacity: 0;
+    transform: translateY(10rem);
+  }
+  to {
+    transform: translateY(0rem);
+    opacity: 1;
+  }
+}
+/** llamados: */
+.cart-modal-succes-product {
+  animation: slide-up-display-cart-message 1.5s ease-in-out forwards;
+}
+
+/*?--- ANIMACION MENSAJE PRODUCTO AGREGADO O REMOVIDO DEL CARRITO - FINAL --- */

@@ -261,12 +261,14 @@ const catchValuesCart = (e) => {
 //funcion para mostrar mensaje una vez que se agrego el producto al carrito:
 const showModalMessageAddProductSucces = (message) => {
   $cartModalSuccesProduct.textContent = message;
-  $cartModalSuccesProduct.style.display = "block";
+  $cartModalSuccesProduct.style.display = "flex";
+  $cartModalSuccesProduct.style.alignItems = "center";
+  $cartModalSuccesProduct.style.justifyContent = "center";
 
-  // Ocultar el mensaje después de 2 segundos
+  // Ocultar el mensaje después de 3 segundos
   setTimeout(() => {
     $cartModalSuccesProduct.style.display = "none";
-  }, 2000);
+  }, 3000);
 };
 
 //funcion que elimina el carrito y resetea el contador de la burbuja del icono carrito ubicado en la barra de navegacion:
@@ -354,6 +356,9 @@ const addUnitCartProduct = (e) => {
     product.quantity++;
     cartShop[e.target.dataset.id] = { ...product };
     addToCart();
+    showModalMessageAddProductSucces(
+      "Se agregó una unidad del producto al Carrito"
+    );
   }
   // e.stopPropagation();
 };
