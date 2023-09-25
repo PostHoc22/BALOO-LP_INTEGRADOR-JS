@@ -4,7 +4,9 @@
 const $cardsContainer = document.querySelector(".product-cards-container"); //contenedor general de cards
 const $cardItem = document.querySelectorAll(".product-card-item"); // contenedor de cada card
 const $cardBtn = document.querySelectorAll(".btn-card"); //botones de card
-const $cardTitle = document.querySelectorAll(".card-info-title");
+const $cardTitle = document.querySelectorAll(".card-info-title"); //titulo del producto en cada card
+const $btnCategories = document.querySelectorAll(".btn-category"); //botones para filtro por caregoria de productos
+
 //!-------- cards: -------------
 
 //! -------- carrito de compras --------
@@ -59,9 +61,9 @@ const fetchData = async () => {
 };
 //*conexion a base de datos de productos: "data.json" - FINAL
 
-//TODO ----------- FUNCIONES AUXILIADORAS: INICIO-------------------
+//TODO -----------  /////////////////   ---------------------------
 
-//TODO ----------- FUNCIONES AUXILIADORAS: FINAL-------------------
+//TODO -----------  /////////////////   ---------------------------
 
 //*template para clonar tarjetas de productos
 const templateCardProduct = (product) => {
@@ -98,6 +100,16 @@ const renderCardProducts = (data) => {
   $cardsContainer.innerHTML = data
     .map((product) => templateCardProduct(product))
     .join("");
+};
+
+const filterByProductsAndActiveBtnCat = (e) => {
+  // Elimina la clase "btn-category-active" de todos los botones de categoría
+  $btnCategories.forEach((button) => {
+    button.classList.remove("btn-category-active");
+  });
+
+  // Agrega la clase "btn-category-active" solo al botón presionado
+  e.currentTarget.classList.add("btn-category-active");
 };
 
 //?---- CONTENEDOR CARDS FINAL ----
@@ -165,18 +177,6 @@ const cartTotalValueBuy = () => {
   nTotal = nTotal.toFixed(2).replace(".", ",");
   return nTotal;
 };
-
-//template para carrito vacio:
-// const templateEmptyCart = () => {
-//   return `
-//         <p> Aun no hay productos cargados en tu Carrito</p>
-//           <i class='bx bx-shopping-bag'></i>
-//           <button class="btn-cart-buy">
-//             <a class="hover-underline" href="#product"> Comprar Ahora </a>
-//             <i class='bx bx-right-arrow-alt bx-flashing'></i>
-//           </button>
-//   `;
-// };
 
 //template para adherir los productos al carrrito de compras
 const templateAddToCart = (product) => {
@@ -436,9 +436,16 @@ const closeConfirmBuy = (e) => {
 //?---- CONTENEDOR CARRITO FINAL ----
 
 const init = () => {
-  document.addEventListener("DOMContentLoaded", cartInfo);
+  document.addEventListener("DOMContentLoaded", cartInfo); //para traer productos al carrito, si estan almacenados en localStorage
 
   document.addEventListener("DOMContentLoaded", fetchData); //para renderizar info de productos apenas termine de cargar el browser
+
+  // Agrega un evento click a cada botón de categoría
+  $btnCategories.forEach((button) => {
+    button.addEventListener("click", filterByProductsAndActiveBtnCat);
+  }); //para filtrar productos por su categoria y activar su boton correspondiente
+
+  $menuIcon.addEventListener("click", toggleMenu); //para desplegar menu en modo celular
 
   $cartIcon.addEventListener("click", toggleCart); //para desplegar carrito
 
@@ -461,7 +468,5 @@ const init = () => {
   window.addEventListener("click", closeDeleteBuy); //para cerrar modal de vaciar carrito luego de presionar el boton "confirmar"
 
   window.addEventListener("click", confirmDeleteBuy);
-
-  $menuIcon.addEventListener("click", toggleMenu);
 };
 init();
