@@ -1,3 +1,6 @@
+//**conexion a base de datos de productos: "data.js"
+import { products } from "./data.js";
+
 //**conexion con los elementos del DOM - INICIO:
 
 //!-------- cards: -------------
@@ -6,7 +9,6 @@ const $cardItem = document.querySelectorAll(".product-card-item"); // contenedor
 const $cardBtn = document.querySelectorAll(".btn-card"); //botones de card
 const $cardTitle = document.querySelectorAll(".card-info-title"); //titulo del producto en cada card
 const $btnCategories = document.querySelectorAll(".btn-category"); //botones para filtro por caregoria de productos
-
 //!-------- cards: -------------
 
 //! -------- carrito de compras --------
@@ -29,13 +31,10 @@ const $modalConfirmBuyCart = document.querySelector(".modal-confirm-cart-buy"); 
 const $closeModalConfirmBuyCart = document.querySelector(".close-modal"); // "x" para cerrar modal de compra confirmada
 const $modalDeleteBuyCart = document.querySelector(".modal-delete-cart-buy"); // modal vaciar carrito ok
 //! -------- carrito de compras --------
-//----
 
 //! -------- menu hamburguesa ----------
 const $menuIcon = document.querySelector(".bx-menu"); //capturo icono del menu
-
 const $menu = document.querySelector(".menu"); // contenedor menu
-
 const $menuShow = document.querySelector(".menu-show"); // para desplegar menu hamburguesa
 //! -------- menu hamburguesa ----------
 
@@ -43,32 +42,15 @@ const $menuShow = document.querySelector(".menu-show"); // para desplegar menu h
 
 //---------------------------------------------------
 
-//declaracion del carrito de compras, el cual puede ser un objeto  vacio o puede ontener productos almacenados en Local Storage
+//**declaracion del carrito de compras, el cual puede ser un objeto  vacio o puede ontener productos almacenados en Local Storage
 let cartShop = {};
 
 //? ---- CONTENEDOR CARDS INICIO ----
 
-//*conexion a base de datos de productos: "data.json" - INICIO
-const fetchData = async () => {
-  try {
-    const res = await fetch("/assets/json/data.json");
-    const data = await res.json();
-    // console.log(data);
-    renderCardProducts(data);
-  } catch (error) {
-    console.log(error);
-  }
-};
-//*conexion a base de datos de productos: "data.json" - FINAL
-
-//TODO -----------  /////////////////   ---------------------------
-
-//TODO -----------  /////////////////   ---------------------------
-
 //*template para clonar tarjetas de productos
 const templateCardProduct = (product) => {
   return `
-      <div class="product-card-item">
+      <div class="product-card-item" id="${product.category}">
           <div class="card-img">
             <img src="${product.imagen_02}" alt="${product.nombre}"
               class="card-img-back" id="card-01-img-b">
@@ -96,13 +78,16 @@ const templateCardProduct = (product) => {
 };
 
 //* renderizado de tarjetas de productos
-const renderCardProducts = (data) => {
-  $cardsContainer.innerHTML = data
+const renderCardProducts = (products) => {
+  $cardsContainer.innerHTML = products
     .map((product) => templateCardProduct(product))
     .join("");
 };
 
+//**Función para filtrar productos por categoría y activar el botón correspondiente
 const filterByProductsAndActiveBtnCat = (e) => {
+  const selectedCategory = e.currentTarget.id; // Obtiene la categoría del botón
+
   // Elimina la clase "btn-category-active" de todos los botones de categoría
   $btnCategories.forEach((button) => {
     button.classList.remove("btn-category-active");
@@ -110,6 +95,16 @@ const filterByProductsAndActiveBtnCat = (e) => {
 
   // Agrega la clase "btn-category-active" solo al botón presionado
   e.currentTarget.classList.add("btn-category-active");
+
+  //para filtrar productos
+  if (selectedCategory != "all") {
+    const filteredProducts = products.filter(
+      (product) => product.category === selectedCategory
+    );
+    renderCardProducts(filteredProducts);
+  } else {
+    renderCardProducts(products);
+  }
 };
 
 //?---- CONTENEDOR CARDS FINAL ----
@@ -134,7 +129,7 @@ const toggleMenu = () => {
 
 //funcion que trae los productos del carrito que esta almacenados en local storage
 const cartInfo = () => {
-  fetchData();
+  // fetchData();
   if (localStorage.getItem("cart")) {
     cartShop = JSON.parse(localStorage.getItem("cart"));
     showModalMessageAddProductSucces(
@@ -322,6 +317,7 @@ const addToCart = () => {
     templateCartProductTotal();
     cartBubbleQuantity();
     saveCartShop();
+    cartInfo();
   } else {
     emptyCart();
   }
@@ -435,10 +431,13 @@ const closeConfirmBuy = (e) => {
 
 //?---- CONTENEDOR CARRITO FINAL ----
 
-const init = () => {
-  document.addEventListener("DOMContentLoaded", cartInfo); //para traer productos al carrito, si estan almacenados en localStorage
+//---------------------------
+//---------------------------
 
-  document.addEventListener("DOMContentLoaded", fetchData); //para renderizar info de productos apenas termine de cargar el browser
+const init = () => {
+  renderCardProducts(products);
+
+  document.addEventListener("DOMContentLoaded", cartInfo); //para traer productos al carrito, si estan almacenados en localStorage
 
   // Agrega un evento click a cada botón de categoría
   $btnCategories.forEach((button) => {
