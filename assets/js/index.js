@@ -38,6 +38,12 @@ const $menu = document.querySelector(".menu"); // contenedor menu
 const $menuShow = document.querySelector(".menu-show"); // para desplegar menu hamburguesa
 //! -------- menu hamburguesa ----------
 
+//! -------- formulario de contactos - validaciones --------
+const $formContact = document.querySelector(".contact-form"); //capturo formulario de contacto
+const $inputEmailContact = document.querySelector("#email"); //capturo input email del formulario de contacto
+const $inputNameContact = document.querySelector("#name"); //capturo input name del formulario de contacto
+const $textMessageContact = document.querySelector("#message"); //capturo text area del formulario de contacto
+//! -------- formulario de contactos - validaciones --------
 //*conexion con los elementos del DOM - FINAL
 
 //---------------------------------------------------
@@ -432,31 +438,73 @@ const closeConfirmBuy = (e) => {
 //?---- CONTENEDOR CARRITO FINAL ----
 
 //---------------------------
+
+//---------------------------
+
+//?---- CONTENEDOR CONTACTO // VALIDACIONES // FINAL ----
+
+// //** validacion input de tipo name
+// const checkNameInput = (input) => {
+//   let valid = false;
+//   const minCharacter = 3;
+//   const maxCharacter = 20;
+// };
+
+// const formValidation = (e) => {
+//   e.preventDefault();
+// };
+
+// ------------------------ udemy
+// ---------------- funciones auxiliares formulario contacto //INICIO ------------------
+
+const showErrorInInput = () => {
+  const error = document.createElement("p");
+  error.textContent = "Hubo un error...";
+  console.log(error);
+};
+
+// ---------------- funciones auxiliares formulario contacto //FINAL ------------------
+
+const inputValidate = (e) => {
+  if (e.target.value.trim() === "") {
+    showErrorInInput();
+  } else {
+    console.log("tiene algo");
+  }
+};
+
+const formValidation = (e) => {
+  e.stopPropagation();
+};
+
+//?---- CONTENEDOR CONTACTO // VALIDACIONES // FINAL ----
+
+//---------------------------
 //---------------------------
 
 const init = () => {
-  renderCardProducts(products);
+  renderCardProducts(products); // renderiza todos los cards-items de productos
 
   document.addEventListener("DOMContentLoaded", cartInfo); //para traer productos al carrito, si estan almacenados en localStorage
 
   // Agrega un evento click a cada botón de categoría
   $btnCategories.forEach((button) => {
     button.addEventListener("click", filterByProductsAndActiveBtnCat);
-  }); //para filtrar productos por su categoria y activar su boton correspondiente
+  }); //para filtrar productos por categoria al activar su boton correspondiente, el cual queda resaltado con color
 
   $menuIcon.addEventListener("click", toggleMenu); //para desplegar menu en modo celular
 
-  $cartIcon.addEventListener("click", toggleCart); //para desplegar carrito
+  $cartIcon.addEventListener("click", toggleCart); //para desplegar contenedor del carrito
 
-  document.addEventListener("DOMContentLoaded", addToCart); //para traer contenedor carrito (vacio o con productos)
+  document.addEventListener("DOMContentLoaded", addToCart); //para cargar informacion al contenedor carrito (ya sea info de carrito vacio o con productos agregados por el usuario)
 
   $cardsContainer.addEventListener("click", catchValuesCart); //para escuchar del DOM evento click con la info de cada producto del carrito
 
   document.addEventListener("click", clearCart); //para eliminar items de productos del carrito de compras
 
-  document.addEventListener("click", addUnitCartProduct); //para adherir items de productos desde el boton "+" del carrito de compras
+  document.addEventListener("click", addUnitCartProduct); //para adherir unidades en items de productos desde el boton "+" del carrito de compras
 
-  document.addEventListener("click", removeUnitCartProduct); //para remover items de productos desde el boton "-" del carrito de compras
+  document.addEventListener("click", removeUnitCartProduct); //para remover unidades en items de productos desde el boton "-" del carrito de compras
 
   window.addEventListener("click", confirmBuy); //para abrir modal de compra confirmada luego de presionar el boton "confirmar" en resumen de compras del carrito
 
@@ -464,8 +512,16 @@ const init = () => {
 
   window.addEventListener("click", deleteBuy); //para abrir modal de vaciar carrito luego de presionar el boton "eliminar" en resumen de compras del carrito
 
-  window.addEventListener("click", closeDeleteBuy); //para cerrar modal de vaciar carrito luego de presionar el boton "confirmar"
+  window.addEventListener("click", closeDeleteBuy); //para cancelar el modal de vaciar carrito luego de presionar el boton "eliminar" (clickeando la "x" de la ventana modal)
 
-  window.addEventListener("click", confirmDeleteBuy);
+  window.addEventListener("click", confirmDeleteBuy); //para cerrar modal de vaciar carrito luego de presionar el boton "confirmar"
+
+  $formContact.addEventListener("submit", formValidation);
+
+  $inputEmailContact.addEventListener("blur", inputValidate);
+
+  $inputNameContact.addEventListener("blur", inputValidate);
+
+  $textMessageContact.addEventListener("blur", inputValidate);
 };
 init();
