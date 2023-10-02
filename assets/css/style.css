@@ -1151,6 +1151,17 @@ header {
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
+.contact-input-error {
+  /* border: tomato 4px solid; */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  color: white;
+  background-color: red;
+  padding: 0.5rem;
+  width: 100%;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  text-align: center;
+}
 /* ? SECCION CONTACT - FINAL */
 
 /* ? SECCION FOOTER - INICIO */

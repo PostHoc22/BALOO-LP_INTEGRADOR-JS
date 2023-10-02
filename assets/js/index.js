@@ -455,22 +455,53 @@ const closeConfirmBuy = (e) => {
 // };
 
 // ------------------------ udemy
-// ---------------- funciones auxiliares formulario contacto //INICIO ------------------
+// *---------------- funciones auxiliares formulario contacto //INICIO ------------------
 
-const showErrorInInput = () => {
-  const error = document.createElement("p");
-  error.textContent = "Hubo un error...";
-  console.log(error);
+//funcion para comprobar si ya existe el mensaje de error. Si existe, evita que se duplique el mensaje de error.
+const clearErrorInput = (reference) => {
+  const existsAlert = reference.querySelector(".contact-input-error");
+  if (existsAlert) {
+    existsAlert.remove();
+  }
 };
 
-// ---------------- funciones auxiliares formulario contacto //FINAL ------------------
+//funcion que determina el error de cada input
+const showErrorInInput = (message, reference) => {
+  //comprobar si ya existe el mensaje de error para evitar que se duplique el mensaje de error
+  clearErrorInput(reference);
+  //genera el html y adhiere estilo
+  const error = document.createElement("p");
+  error.textContent = message;
+  error.classList.add("contact-input-error");
+  // console.log(error);
 
+  //inyecta el error
+  reference.appendChild(error);
+};
+
+//funcion para validar input email
+const validateEmail = (email) => {
+  const regex = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+  const result = regex.test(email);
+  return result;
+};
+
+//* ---------------- funciones auxiliares formulario contacto //FINAL ------------------
+
+//funcion que valida los inputs del formulario de contacto:
 const inputValidate = (e) => {
+  const reference = e.target.parentElement;
+  //si no hay valor cargado en el input, muestra el error
   if (e.target.value.trim() === "") {
-    showErrorInInput();
-  } else {
-    console.log("tiene algo");
+    showErrorInInput(`El campo "${e.target.name}" es obligatorio`, reference);
+    return;
   }
+  if (e.target.id === "email" && !validateEmail(e.target.value)) {
+    showErrorInInput("El dato ingresado es incorrecto", reference);
+    return;
+  }
+  //si se cargo el dato correcto, limpia el error
+  clearErrorInput(reference);
 };
 
 const formValidation = (e) => {
