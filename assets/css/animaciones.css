@@ -3,14 +3,14 @@
 /*?--- ANIMACION PARA CARRITO DESPLEGABLE - INICIO --- */
 /** declaraciones: */
 /* para dar opacidad a menu-toogle a recagar la pagina*/
-/* @keyframes opacity-loadPage-toogleCart {
+@keyframes opacity-loadPage-toogleCart {
   from {
     opacity: 0;
   }
   to {
     opacity: 0;
   }
-} */
+}
 /* para deslizar entrada de carrito */
 @keyframes cart-slide-in {
   from {
@@ -36,14 +36,13 @@
 /** llamados a las animaciones: */
 /** para apertura de carrito */
 .cart-show {
-  animation: cart-slide-in 1s ease-in-out forwards;
-  /* opacity-loadPage-toogle 1s ease-in; */
+  animation: cart-slide-in 1s ease-in-out forwards,
+    opacity-loadPage-toogle 1s ease-in;
 }
 /** para cierre de carrito */
 .cart-dropdown {
   /* visibility: visible; */
-  animation: cart-slide-out 1s ease-in-out;
-  /* opacity-loadPage-toogle 1s ease-in; */
+  animation: cart-slide-out 1s ease-in-out, opacity-loadPage-toogle 1s ease-in;
 }
 
 /*?--- ANIMACION PARA CARRITO DESPLEGABLE - FINAL --- */

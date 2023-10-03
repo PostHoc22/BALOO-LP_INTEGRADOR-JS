@@ -465,6 +465,12 @@ const clearErrorInput = (reference) => {
   }
 };
 
+const clearSuccesInput = (reference) => {
+  const existsAlert = reference.querySelector(".contact-input-succes");
+  if (existsAlert) {
+    existsAlert.remove();
+  }
+};
 //funcion que determina el error de cada input
 const showErrorInInput = (message, reference) => {
   //comprobar si ya existe el mensaje de error para evitar que se duplique el mensaje de error
@@ -477,6 +483,20 @@ const showErrorInInput = (message, reference) => {
 
   //inyecta el error
   reference.appendChild(error);
+};
+
+//funcion que determina el error de cada input
+const showSuccesInInput = (message, reference) => {
+  //comprobar si ya existe el mensaje de exito para evitar que se duplique el mensaje
+  clearErrorInput(reference);
+  //genera el html y adhiere estilo
+  const succes = document.createElement("p");
+  succes.textContent = message;
+  succes.classList.add("contact-input-succes");
+  // console.log(error);
+
+  //inyecta el exito
+  reference.appendChild(succes);
 };
 
 //funcion para validar input email
@@ -496,12 +516,17 @@ const inputValidate = (e) => {
     showErrorInInput(`El campo "${e.target.name}" es obligatorio`, reference);
     return;
   }
+  //si hay un valor cargado en el input email que no coincide con su validacion, muestra el error
   if (e.target.id === "email" && !validateEmail(e.target.value)) {
     showErrorInInput("El dato ingresado es incorrecto", reference);
     return;
   }
   //si se cargo el dato correcto, limpia el error
   clearErrorInput(reference);
+  showSuccesInInput("Dato Correcto", reference);
+  setTimeout(() => {
+    clearSuccesInput(reference);
+  }, 2000);
 };
 
 const formValidation = (e) => {

@@ -297,7 +297,7 @@ header {
   position: absolute;
   top: 3.7rem;
   z-index: 2;
-  transform: translate(-100%);
+  transform: translate(-150%);
   transition: all 1.5s cubic-bezier(0.92, 0.01, 0.35, 0.99);
 }
 
@@ -1150,7 +1150,8 @@ header {
   color: #ffffff;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
-
+/**alertas en inputs de formulario de contacto*/
+/*mensaje de error */
 .contact-input-error {
   /* border: tomato 4px solid; */
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
@@ -1161,6 +1162,20 @@ header {
   font-size: 1rem;
   border-radius: 0.5rem;
   text-align: center;
+}
+/*mensaje de exito */
+.contact-input-succes {
+  /* border: tomato 4px solid; */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  color: white;
+  background-color: green;
+  padding: 0.5rem;
+  width: 100%;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  transition: all 4s ease-in-out forwards;
+  transition-delay: 1s;
 }
 /* ? SECCION CONTACT - FINAL */
 
