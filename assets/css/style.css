@@ -1072,7 +1072,7 @@ header {
   flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
-  gap: 2rem;
+  gap: 4rem;
   padding: 1rem 0;
 }
 .contact-form-customer {
@@ -1116,13 +1116,19 @@ header {
   text-shadow: -1px -1px 5px var(--bc-pink), 1px 1px #333;
   background-color: transparent;
 }
-.contact-fomt-customer_message {
-  /* flex: 1 1 100%; */
-  width: 18rem;
+/* .contact-for-customer_message { */
+/* flex: 1 1 100%; */
+/* width: 18rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   vertical-align: top;
+  position: relative;
+} */
+.contact-form-customer_email,
+.contact-form-customer_name,
+.contact-form-customer_message {
+  position: relative;
 }
 .contact-form-customer_message label {
   width: 18rem;
@@ -1162,6 +1168,9 @@ header {
   font-size: 1rem;
   border-radius: 0.5rem;
   text-align: center;
+  position: absolute;
+  transform: translateY(120%);
+  bottom: 0;
 }
 /*mensaje de exito */
 .contact-input-succes {
@@ -1176,6 +1185,9 @@ header {
   text-align: center;
   transition: all 4s ease-in-out forwards;
   transition-delay: 1s;
+  position: absolute;
+  transform: translateY(120%);
+  bottom: 0;
 }
 /* ? SECCION CONTACT - FINAL */
 

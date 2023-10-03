@@ -263,3 +263,25 @@
 }
 
 /*?--- ANIMACION MENSAJE PRODUCTO AGREGADO O REMOVIDO DEL CARRITO - FINAL --- */
+
+/*?--- ANIMACION MENSAJE ERROR Y CORRECTO FORMULARIO DE CONTACTO - INICIO --- */
+/** declaraciones:*/
+/*para animar entrada */
+@keyframes showAlertInputContactForm {
+  from {
+    opacity: 0;
+    transform: translateY(90%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(120%);
+  }
+}
+/** llamados*/
+/*para animar entrada*/
+.contact-input-error,
+.contact-input-succes {
+  animation: showAlertInputContactForm 0.5s ease-in forwards;
+}
+
+/*?--- ANIMACION MENSAJE ERROR Y CORRECTO FORMULARIO DE CONTACTO - FINAL --- */
