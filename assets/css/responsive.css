@@ -144,6 +144,7 @@
   .cart {
     width: 80%;
     justify-content: flex-end;
+    padding-right: 1rem;
   }
   /* ? ---------- HEADER ---------- */
   .cart-show {
@@ -183,6 +184,11 @@
   .contact-img {
     display: block;
     border-radius: 1rem;
+    width: 90%;
+    margin: auto;
+  }
+  .contact-form {
+    flex: 2 1 70%;
   }
 }
 
@@ -270,6 +276,15 @@
     }
   }
 
+  @media (max-width: 376px) {
+    /* ? ---------- PAYMENT ---------- */
+    .payment-list li {
+      width: min-content;
+      flex-wrap: wrap;
+      gap: 0rem;
+    }
+  }
+
   @media (max-width: 320px) {
     /* ? ---------- HERO ---------- */
     .hero-banner-data-title {
@@ -286,6 +301,7 @@
 
 @media (max-width: 330px) {
   /* ? ---------- CONTACT ---------- */
+
   .contact-form-customer > div {
     width: 10rem;
   }
@@ -301,6 +317,10 @@
     font-size: 0.8rem;
     width: 10rem;
     padding: 0;
+  }
+  .contact-input-error,
+  .contact-input-succes {
+    font-size: 0.5rem;
   }
 }
 
@@ -322,6 +342,16 @@
   .login-dropdown-item a {
     /* transform: translateY(-2000%); */
     font-size: 0.6rem;
+  }
+}
+
+@media (max-width: 376px) {
+  /* ? ---------- PAYMENT ---------- */
+  .payment-title {
+    font-size: 1.5rem;
+  }
+  .payment-list {
+    gap: 2rem;
   }
 }
 
@@ -354,6 +384,43 @@
   .hero-banner-data {
     min-block-size: none;
     bottom: 1rem;
+  }
+}
+
+@media (max-width: 214px) {
+  /* ? ---------- CONTACT ---------- */
+  .contact-title,
+  .contact-data > div h4,
+  .contact-data > div p,
+  .contact-form div > div,
+  .contact-form-customer_message label,
+  #email,
+  #name,
+  #message {
+    font-size: 0.7rem;
+  }
+
+  #email,
+  #name,
+  #message {
+    width: 5rem;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  #email::placeholder,
+  #name::placeholder,
+  #message::placeholder {
+    font-size: 0.5rem;
+  }
+  .contact-form-customer label {
+    text-align: center;
+  }
+
+  .contact-input-error,
+  .contact-input-succes {
+    width: 6rem;
+    margin: 0 2rem;
   }
 }
 

@@ -245,17 +245,6 @@ header {
   color: var(--text-gray-dark);
   width: max-content;
 }
-/* .glass {
-  position: absolute;
-  padding: 100vh;
-  height: 100vh;
-  top: 317px;
-  left: 0;
-  z-index: 1;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  display: none;
-} */
 
 /*TODO ESTILOS CARRITO Y SU MENU --- INICIO*/
 /* arreglar con media query posicion a flex start para .cart */
@@ -589,22 +578,22 @@ header {
 .modal-content {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
   align-items: center;
   justify-content: center;
   background-color: #fefefe;
-  margin: 15rem auto;
-  padding: 2rem;
+  margin: auto;
+  padding: 1rem;
   border: 0.1rem solid #888;
   width: 80%;
-  height: 12rem;
+  height: 15rem;
   border-radius: 2rem;
   position: relative;
 }
 
 .modal-content p {
-  line-height: 1.6rem;
-  font-size: 1.3rem;
+  line-height: 1.3rem;
+  font-size: 1.2rem;
   text-align: center;
 }
 
@@ -627,7 +616,17 @@ header {
 }
 
 /*TODO ESTILOS CARRITO Y SU MENU --- FINAL*/
-
+/* .glass {
+  position: absolute;
+  padding: 100vh;
+  height: 100vh;
+  top: 317px;
+  left: 0;
+  z-index: 1;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  display: none;
+} */
 /** FINAL DE ESTILOS DEL HEADER */
 
 /** INICIO DE ESTILOS DEL MAIN */
@@ -892,14 +891,16 @@ header {
 
 /* ? SECCION PAYMENT - INICIO */
 .payment {
-  margin-top: 8rem;
+  margin: 8rem auto 0rem;
   padding: 2rem 1rem;
-  width: 100%;
+  width: 90%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  justify-items: center;
+
   gap: 1rem;
   background-image: linear-gradient(
     to right top,
@@ -962,39 +963,12 @@ header {
 
 /* ? SECCION PAYMENT - FINAL */
 
-/* 
-.contenedor {
-  position: relative;
-  width: 100%;
-  padding-bottom: 50%;
-  background-color: rgb(240, 240, 240);
-}
-
-.div-superior {
-  position: absolute;
-  top: 10%;
-  left: 10%;
-  width: 40%;
-  height: 60%;
-  background-color: #0026ff;
-  z-index: 2;
-}
-
-.div-inferior {
-  width: 40%;
-  height: 60%;
-  background-color: #00ff00;
-  position: absolute;
-  left: 40%;
-  top: 20%;
-} */
-
 /* ? SECCION CONTACT - INICIO */
 
 .contact {
-  width: 100%;
+  width: 90%;
   height: auto;
-  margin-top: 10rem;
+  margin: 10rem auto 0rem auto;
   text-align: center;
   background-image: linear-gradient(
       to top,
@@ -1066,7 +1040,7 @@ header {
   padding-top: 0.5rem;
 }
 .contact-form {
-  flex: 1 1 40%;
+  flex: 2 1 50%;
   /* border: white solid 4px; */
   display: flex;
   flex-direction: column;
