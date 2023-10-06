@@ -124,6 +124,11 @@ const filterByProductsAndActiveBtnCat = (e) => {
 const toggleMenu = () => {
   $menu.classList.toggle("menu-show");
   $menu.classList.toggle("menu");
+
+  // Cierra el menú del carrito si está abierto
+  if ($cartDropdown.classList.contains("cart-show")) {
+    toggleCart();
+  }
 };
 
 //?---- CONTENEDOR MENU-TOGGLE FINAL ----
@@ -153,6 +158,11 @@ const saveCartShop = () => {
 const toggleCart = () => {
   $cartDropdown.classList.toggle("cart-dropdown");
   $cartDropdown.classList.toggle("cart-show");
+
+  // Cierra el menú hamburguesa si está abierto
+  if ($menu.classList.contains("menu-show")) {
+    toggleMenu();
+  }
 };
 
 //funcion que calcula la cantidad total en unidades de productos adquiridos por el usuario en el contenedor "resumen de compras"

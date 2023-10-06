@@ -616,17 +616,17 @@ header {
 }
 
 /*TODO ESTILOS CARRITO Y SU MENU --- FINAL*/
-/* .glass {
+.glass {
   position: absolute;
-  padding: 100vh;
-  height: 100vh;
-  top: 317px;
+  /* padding: 100%; */
+  height: 100%;
+  top: 50px;
   left: 0;
   z-index: 1;
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   display: none;
-} */
+}
 /** FINAL DE ESTILOS DEL HEADER */
 
 /** INICIO DE ESTILOS DEL MAIN */
