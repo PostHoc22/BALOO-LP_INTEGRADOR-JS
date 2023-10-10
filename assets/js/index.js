@@ -160,6 +160,7 @@ const saveCartShop = () => {
 const toggleCart = () => {
   $cartDropdown.classList.toggle("cart-dropdown");
   $cartDropdown.classList.toggle("cart-show");
+  document.body.style.classList.add("glass");
 
   // Cierra el menú hamburguesa si está abierto
   if ($menu.classList.contains("menu-show")) {
@@ -459,6 +460,7 @@ const closeConfirmBuy = (e) => {
     deleteItemCart();
     emptyCart();
     cartShop = {};
+    window.location.href = "https://baloo-lp-integrador-js.vercel.app/";
   }
   e.stopPropagation();
 };
