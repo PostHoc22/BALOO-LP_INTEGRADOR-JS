@@ -25,7 +25,7 @@ const $cartModalSuccesProduct = document.querySelector(
 ); //modal con mensaje de producto agregado al carrito
 const $btnDeleteCartBuy = document.querySelector(".empty-cart"); //para vaciar carrito
 const $btnConfirmCartBuy = document.querySelector(".confirm-buy"); // boton confirmar compra del carrito
-const $btnAddCart = document.querySelector(".cart-product-btn-add"); //para boton "+" que suma unidades al producto agregado al carrito
+const $btnAddCart = document.querySelector(".btn-cart-buy"); //para boton "+" que suma unidades al producto agregado al carrito
 const $btnRemoveCart = document.querySelector(".cart-product-btn-rem"); //para boton "-" que resta unidades al producto agregado al carrito
 const $modalConfirmBuyCart = document.querySelector(".modal-confirm-cart-buy"); // modal de compra confirmada
 const $closeModalConfirmBuyCart = document.querySelector(".close-modal"); // "x" para cerrar modal de compra confirmada
@@ -36,6 +36,8 @@ const $modalDeleteBuyCart = document.querySelector(".modal-delete-cart-buy"); //
 const $menuIcon = document.querySelector(".bx-menu"); //capturo icono del menu
 const $menu = document.querySelector(".menu"); // contenedor menu
 const $menuShow = document.querySelector(".menu-show"); // para desplegar menu hamburguesa
+const $menuOption = document.querySelectorAll(".navbar-list-item");
+
 //! -------- menu hamburguesa ----------
 
 //! -------- formulario de contactos - validaciones --------
@@ -164,6 +166,22 @@ const toggleCart = () => {
     toggleMenu();
   }
 };
+
+//*----------- FUNCION PARA CERRAR MENUS / INICIO --------------------//
+
+const closeMenus = () => {
+  // Cierra el menú del carrito si está abierto
+  if ($cartDropdown.classList.contains("cart-show")) {
+    toggleCart();
+  }
+
+  // Cierra el menú hamburguesa si está abierto
+  if ($menu.classList.contains("menu-show")) {
+    toggleMenu();
+  }
+};
+
+//*----------- FUNCION PARA CERRAR MENUS / FINAL --------------------//
 
 //funcion que calcula la cantidad total en unidades de productos adquiridos por el usuario en el contenedor "resumen de compras"
 const cartTotalQuantityBuy = () => {
@@ -453,20 +471,6 @@ const closeConfirmBuy = (e) => {
 
 //?---- CONTENEDOR CONTACTO // VALIDACIONES // FINAL ----
 
-// //** validacion input de tipo name
-// const checkNameInput = (input) => {
-//   let valid = false;
-//   const minCharacter = 3;
-//   const maxCharacter = 20;
-// };
-
-// const formValidation = (e) => {
-//   e.preventDefault();
-// };
-
-// ------------------------ udemy
-// *---------------- funciones auxiliares formulario contacto //INICIO ------------------
-
 //funcion para comprobar si ya existe el mensaje de error. Si existe, evita que se duplique el mensaje de error.
 const clearErrorInput = (reference) => {
   const existsAlert = reference.querySelector(".contact-input-error");
@@ -562,6 +566,10 @@ const init = () => {
 
   $cartIcon.addEventListener("click", toggleCart); //para desplegar contenedor del carrito
 
+  $btnAddCart.addEventListener("click", closeMenus); // para cerrar contenedor carrito cuando se hace clic en "Comprar Más"
+
+  $menu.addEventListener("click", closeMenus); // para cerrar contenedor menu cuando se haga clic en alguna de sus opciones
+
   document.addEventListener("DOMContentLoaded", addToCart); //para cargar informacion al contenedor carrito (ya sea info de carrito vacio o con productos agregados por el usuario)
 
   $cardsContainer.addEventListener("click", catchValuesCart); //para escuchar del DOM evento click con la info de cada producto del carrito
@@ -591,3 +599,7 @@ const init = () => {
   $textMessageContact.addEventListener("blur", inputValidate);
 };
 init();
+
+$menuOption.addEventListener("click", closeMenus);
+
+console.log($menuOption);
