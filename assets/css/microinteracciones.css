@@ -209,7 +209,7 @@
 
 /*boton eliminar para vaciar carrrito - final*/
 
-/** BOTON CATEGORIES */
+/** BOTON CATEGORIAS */
 .btn-category::before,
 .btn-category::after {
   position: absolute;

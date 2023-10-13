@@ -471,7 +471,7 @@ const closeConfirmBuy = (e) => {
 
 //---------------------------
 
-//?---- CONTENEDOR CONTACTO // VALIDACIONES // FINAL ----
+//?---- CONTENEDOR CONTACTO // VALIDACIONES // INICIO ----
 
 //funcion para comprobar si ya existe el mensaje de error. Si existe, evita que se duplique el mensaje de error.
 const clearErrorInput = (reference) => {
@@ -481,6 +481,7 @@ const clearErrorInput = (reference) => {
   }
 };
 
+//funcion para comprobar si ya existe el mensaje de exito. Si existe, evita que se duplique.
 const clearSuccesInput = (reference) => {
   const existsAlert = reference.querySelector(".contact-input-succes");
   if (existsAlert) {
@@ -501,7 +502,7 @@ const showErrorInInput = (message, reference) => {
   reference.appendChild(error);
 };
 
-//funcion que determina el error de cada input
+//funcion que determina el exito de cada input
 const showSuccesInInput = (message, reference) => {
   //comprobar si ya existe el mensaje de exito para evitar que se duplique el mensaje
   clearErrorInput(reference);
@@ -522,11 +523,20 @@ const validateEmail = (email) => {
   return result;
 };
 
+//funcion para validar input name
+const validateName = (name) => {
+  const regex = /^[A-Za-z]+( [A-Za-z]+)*$/;
+  const result = regex.test(name);
+  return result;
+};
 //* ---------------- funciones auxiliares formulario contacto //FINAL ------------------
 
 //funcion que valida los inputs del formulario de contacto:
 const inputValidate = (e) => {
   const reference = e.target.parentElement;
+
+  // $inputNameContact.value = $inputNameContact.value.toLowerCase();
+
   //si no hay valor cargado en el input, muestra el error
   if (e.target.value.trim() === "") {
     showErrorInInput(`El campo "${e.target.name}" es obligatorio`, reference);
@@ -534,7 +544,29 @@ const inputValidate = (e) => {
   }
   //si hay un valor cargado en el input email que no coincide con su validacion, muestra el error
   if (e.target.id === "email" && !validateEmail(e.target.value)) {
-    showErrorInInput("El dato ingresado es incorrecto", reference);
+    showErrorInInput(
+      "El dato ingresado es incorrecto, No es un email",
+      reference
+    );
+    return;
+  }
+  //si hay un valor cargado en el input name que no coincide con su validacion, muestra el error
+  if (e.target.id === "name" && !validateName(e.target.value)) {
+    showErrorInInput(
+      'Error: tipo de dato debe ser "texto" con un solo espacio en blanco entre palabras',
+      reference
+    );
+
+    return;
+  }
+  //si el valor de input name es menor a 3 caracteres, muestra el error
+  if (e.target.id === "name" && $inputNameContact.value.length < 3) {
+    showErrorInInput("El nombre debe tener al menos 3 caracteres", reference);
+    return;
+  }
+  //si el valor de input name es mayo a 18 caracteres, muestra el error
+  if (e.target.id === "name" && $inputNameContact.value.length > 18) {
+    showErrorInInput("El nombre no debe tener más de 18 caracteres", reference);
     return;
   }
   //si se cargo el dato correcto, limpia el error
@@ -546,6 +578,39 @@ const inputValidate = (e) => {
 };
 
 const formValidation = (e) => {
+  e.preventDefault();
+
+  const emailValue = $inputEmailContact.value;
+  const nameValue = $inputNameContact.value;
+  const messageValue = $textMessageContact.value;
+
+  validateEmail(emailValue);
+  validateName(nameValue);
+
+  if (
+    !emailValue ||
+    !nameValue ||
+    !messageValue ||
+    validateEmail(emailValue) ||
+    validateName(nameValue)
+  ) {
+    alert("Por favor, complete todos los campos obligatorios");
+    return;
+  }
+
+  // También puedes realizar validaciones específicas, como verificar el formato del correo electrónico
+
+  // Si el formulario pasa la validación, puedes enviar los datos al servidor o realizar otras acciones aquí
+
+  // Por ejemplo, puedes enviar los datos mediante una solicitud AJAX
+
+  // Luego, puedes mostrar un mensaje de éxito o redirigir al usuario a una página de confirmación
+
+  // Aquí puedes mostrar una alerta en este ejemplo
+  alert("¡Formulario validado con éxito!");
+
+  // También podrías redirigir al usuario a una página de confirmación si es necesario
+  // window.location.href = "pagina_de_confirmacion.html";
   e.stopPropagation();
 };
 
@@ -601,7 +666,3 @@ const init = () => {
   $textMessageContact.addEventListener("blur", inputValidate);
 };
 init();
-
-$menuOption.addEventListener("click", closeMenus);
-
-console.log($menuOption);

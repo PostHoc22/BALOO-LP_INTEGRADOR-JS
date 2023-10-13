@@ -609,7 +609,9 @@ header {
 }
 
 .close-modal:hover,
-.close-modal:focus {
+.close-modal:focus,
+.close-modal-delete:hover,
+.close-modal-delete:focus {
   color: black;
   text-decoration: none;
   cursor: pointer;
@@ -1161,7 +1163,7 @@ header {
   transition-delay: 1s;
   position: absolute;
   transform: translateY(120%);
-  bottom: 0;
+  bottom: -2.5rem;
 }
 /* ? SECCION CONTACT - FINAL */
 

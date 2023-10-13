@@ -285,3 +285,40 @@
 }
 
 /*?--- ANIMACION MENSAJE ERROR Y CORRECTO FORMULARIO DE CONTACTO - FINAL --- */
+
+/*?--- ANIMACION MODAL "CONFIRMAR COMPRA", "ELIMINAR COMPRA" Y "ENVIO DE FORMULARIO DE CONTACTO" - INICIO --- */
+/** declaraciones:*/
+/*para animar entrada */
+@keyframes showSweetAlert {
+  0% {
+    transform: scale(0.7);
+    -webkit-transform: scale(0.7);
+    opacity: 0.2;
+  }
+  25% {
+    transform: scale(1.25);
+    -webkit-transform: scale(1.25);
+    opacity: 0.5;
+  }
+  45% {
+    transform: scale(1.05);
+    -webkit-transform: scale(1.05);
+  }
+  80% {
+    transform: scale(0.95);
+    -webkit-transform: scale(0.95);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    -webkit-transform: scale(1);
+    opacity: 1;
+  }
+}
+/** llamados*/
+/*para animar entrada*/
+.modal-content,
+.contact-input-succes {
+  animation: showSweetAlert 0.5s ease forwards;
+}
+/*?--- ANIMACION MODAL "CONFIRMAR COMPRA", "ELIMINAR COMPRA" Y "ENVIO DE FORMULARIO DE CONTACTO" - FINAL --- */
