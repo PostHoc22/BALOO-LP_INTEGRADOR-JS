@@ -45,6 +45,7 @@ const $formContact = document.querySelector(".contact-form"); //capturo formular
 const $inputEmailContact = document.querySelector("#email"); //capturo input email del formulario de contacto
 const $inputNameContact = document.querySelector("#name"); //capturo input name del formulario de contacto
 const $textMessageContact = document.querySelector("#message"); //capturo text area del formulario de contacto
+const $charCount = document.querySelector("#charCount"); // capturo contenedor para conteo de caracteres en textarea
 //! -------- formulario de contactos - validaciones --------
 //*conexion con los elementos del DOM - FINAL
 
@@ -529,6 +530,28 @@ const validateName = (name) => {
   const result = regex.test(name);
   return result;
 };
+
+// funcion para obtener el elemento de conteo de caracteres del textarea
+const charCountTextArea = () => {
+  // Establece el máximo de caracteres permitidos
+  const charsInit = 0;
+  const charsLast = 270;
+
+  const currentChars = $textMessageContact.value.length;
+
+  // Muestra la cantidad de caracteres restantes
+  $charCount.textContent = `${charsInit + currentChars}/${charsLast}`;
+
+  // Si se supera el límite, recorta el texto
+  if (currentChars > charsLast) {
+    $textMessageContact.value = $textMessageContact.value.substring(
+      0,
+      charsLast
+    );
+    $charCount.textContent = `${charsLast}/${charsLast}`;
+  }
+};
+
 //* ---------------- funciones auxiliares formulario contacto //FINAL ------------------
 
 //funcion que valida los inputs del formulario de contacto:
@@ -577,8 +600,10 @@ const inputValidate = (e) => {
   }, 2000);
 };
 
+//funcion para validar el envio o no del formulario de contacto
 const formValidation = (e) => {
   e.preventDefault();
+  e.stopPropagation();
 
   const emailValue = $inputEmailContact.value;
   const nameValue = $inputNameContact.value;
@@ -591,8 +616,8 @@ const formValidation = (e) => {
     !emailValue ||
     !nameValue ||
     !messageValue ||
-    validateEmail(emailValue) ||
-    validateName(nameValue)
+    !validateEmail(emailValue) ||
+    !validateName(nameValue)
   ) {
     alert("Por favor, complete todos los campos obligatorios");
     return;
@@ -611,7 +636,6 @@ const formValidation = (e) => {
 
   // También podrías redirigir al usuario a una página de confirmación si es necesario
   // window.location.href = "pagina_de_confirmacion.html";
-  e.stopPropagation();
 };
 
 //?---- CONTENEDOR CONTACTO // VALIDACIONES // FINAL ----
@@ -657,12 +681,14 @@ const init = () => {
 
   window.addEventListener("click", confirmDeleteBuy); //para cerrar modal de vaciar carrito luego de presionar el boton "confirmar"
 
-  $formContact.addEventListener("submit", formValidation);
+  $formContact.addEventListener("submit", formValidation); //para confirmar o no el envio del formulario de contacto
 
-  $inputEmailContact.addEventListener("blur", inputValidate);
+  $inputEmailContact.addEventListener("blur", inputValidate); //para validar el input email
 
-  $inputNameContact.addEventListener("blur", inputValidate);
+  $inputNameContact.addEventListener("blur", inputValidate); //para validar el input name
 
-  $textMessageContact.addEventListener("blur", inputValidate);
+  $textMessageContact.addEventListener("blur", inputValidate); //para validar el textaera
+
+  $textMessageContact.addEventListener("input", charCountTextArea); //para contar los caracteres cargados en texarea, establenciendo un maximo
 };
 init();
